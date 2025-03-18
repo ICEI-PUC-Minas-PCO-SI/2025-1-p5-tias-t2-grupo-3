@@ -6,7 +6,7 @@
 
 `1º semestre/2025`
 
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+Eco dump é um sistema para o gerenciamento eficiente de caçambas e o controle dos resíduos descartados. Esse sistema terá como principal objetivo otimizar a gestão da coleta, transporte e destinação de resíduos, assegurando maior controle sobre a utilização das caçambas e promovendo a conformidade com as normas ambientais.
 
 ## Integrantes
 
