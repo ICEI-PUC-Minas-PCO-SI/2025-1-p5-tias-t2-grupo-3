@@ -26,19 +26,18 @@ Lembre-se que você deve ser enumerar e descrever precisamente e personalizada t
 
 Com base na análise das personas, foram identificadas as seguintes histórias de usuários:
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
+| EU COMO...           | QUERO/PRECISO...                                           | PARA...                                                |
+|----------------------|------------------------------------------------------------|--------------------------------------------------------|
+| Usuário autenticado   | Registrar uma nova caçamba no sistema                      | Manter o controle das caçambas disponíveis e seu status |
+| Usuário autenticado   | Editar os dados de uma caçamba registrada                  | Atualizar detalhes como localização, capacidade e status|
+| Administrador         | Excluir caçambas que não estão em uso                      | Garantir que apenas caçambas ativas e em uso permaneçam no sistema |
+| Usuário autenticado   | Visualizar uma lista de todas as caçambas cadastradas      | Consultar informações como ID, localização, capacidade e status das caçambas |
+| Usuário autenticado   | Buscar caçambas no sistema usando filtros como localização e status | Encontrar rapidamente as caçambas que atendem aos meus critérios |
+| Administrador         | Receber notificações por e-mail sobre mudanças no status das caçambas | Ser informado rapidamente sobre alterações importantes no status das caçambas |
+| Administrador         | Gerar relatórios sobre o uso das caçambas                   | Analisar os dados de uso e tomar decisões informadas    |
+| Usuário autenticado   | Visualizar a localização das caçambas em um mapa interativo | Verificar facilmente a posição geográfica das caçambas cadastradas |
+| Administrador         | Acessar o histórico de modificações de caçambas             | Saber quem fez alterações nas caçambas e quais campos foram modificados |
 
-Apresente aqui as histórias de usuários que são relevantes para o projeto da sua solução. As histórias de usuários consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuários por contexto, para facilitar consultas recorrentes a esta parte do documento.
-
-> **Links úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (user stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 common user story mistakes](https://airfocus.com/blog/user-story-mistakes/)
 
 ## Requisitos
 
@@ -69,8 +68,6 @@ As tabelas a seguir apresentam os requisitos funcionais e não funcionais que de
 
 
 ## Restrições
-
-Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
 O projeto está restrito aos itens apresentados na tabela a seguir.
 
