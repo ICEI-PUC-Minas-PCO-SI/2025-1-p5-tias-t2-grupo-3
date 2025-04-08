@@ -1,23 +1,24 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto. Visando contextualizar melhor o projeto e destacar sua importância para a disciplina, que é **extensionista**, acrescente todas as informações relevantes que julgar necessárias.
+O presente projeto tem como objetivo o desenvolvimento de um sistema web denominado EcoDump, voltado para o controle e gerenciamento de caçambas e dos resíduos nelas depositados, no contexto de uma empresa de gestão de resíduos sólidos. Este trabalho é parte de uma disciplina de extensão universitária e tem como propósito não apenas aplicar os conhecimentos técnicos adquiridos ao longo do curso, mas também contribuir com uma solução prática para um problema real do setor.
+
+O descarte correto de resíduos é um desafio crescente nas cidades, especialmente com o aumento da demanda por serviços de aluguel de caçambas para obras civis, reformas e limpeza urbana. Em muitos casos, a ausência de controle sobre a localização, status e conteúdo dessas caçambas pode resultar em ineficiência operacional, impactos ambientais e descumprimento de normas regulatórias. Nesse cenário, o EcoDump surge como uma solução inovadora e funcional, permitindo o acompanhamento em tempo real das caçambas, o registro de resíduos descartados e a geração de relatórios gerenciais que auxiliam na tomada de decisões.
+
+Além disso, o projeto busca sensibilizar a comunidade acadêmica sobre a importância do uso da tecnologia na promoção de práticas sustentáveis e no apoio à gestão ambiental. A aplicação será voltada inicialmente para uso interno da empresa parceira, mas possui potencial de escalabilidade para atender outras instituições do setor futuramente. O público-alvo direto da aplicação são os funcionários e administradores da empresa de coleta e gestão de resíduos, que terão à disposição uma plataforma moderna, intuitiva e eficiente para otimizar suas rotinas de trabalho.
 
 ## Cliente 
+
 Nesta seção, devem ser apresentadas informações essenciais sobre o cliente (parceiro) para garantir um entendimento mais preciso do projeto como uma iniciativa extensionista.  
 
 Recomenda-se incluir dados como missão, visão e valores da organização, além de seu ramo de atuação, porte, nicho de mercado e principais desafios enfrentados. Também é relevante fornecer informações sobre sua localização, histórico, impacto social e possíveis demandas específicas. Quanto mais detalhadas forem essas informações, mais embasada será a análise do contexto, permitindo uma abordagem estratégica e alinhada às necessidades do cliente.
 
 ## Problema
-Aqui, a equipe deve fornecer uma descrição detalhada do problema a ser resolvido. Não é o momento adequado para abordar questões técnicas relacionadas ao desenvolvimento da aplicação. O objetivo é compreender e comunicar de maneira precisa qual é o desafio ou necessidade que motiva a criação da aplicação.
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de fato existir, pois ainda não é a hora de apresentar requisitos detalhados ou projetos.
+Atualmente, a empresa parceira realiza a gestão de suas caçambas e resíduos de forma manual, utilizando planilhas e registros físicos para controlar a localização, status e uso das caçambas. Esse modelo acarreta uma série de dificuldades, como falhas de comunicação, perda de informações, falta de rastreabilidade das mudanças realizadas e baixa eficiência na geração de relatórios ou indicadores que auxiliem na tomada de decisão.
 
-O grupo pode optar por fazer uso de ferramentas como Design Thinking, que permite uma visão completa do problema.
+Além disso, não há um sistema padronizado que permita visualizar, em tempo real, a situação de cada caçamba – se está disponível, em uso ou em manutenção –, nem registrar de forma organizada os tipos e quantidades de resíduos descartados. Isso gera riscos operacionais e ambientais, além de dificultar o cumprimento de exigências legais e compromissos com clientes e órgãos fiscalizadores.
 
-> **Links úteis**:
-> - [Objetivos, problema de pesquisa e justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz certezas, suposições e dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+A aplicação EcoDump será utilizada diretamente por administradores e funcionários da empresa de gerenciamento de resíduos, que necessitam de uma plataforma confiável para registrar, consultar e acompanhar todas as informações relevantes sobre as caçambas, seus deslocamentos e os resíduos nelas acondicionados. O sistema proporcionará mais controle, agilidade e segurança, promovendo uma gestão mais eficiente e sustentável.
 
 ## Objetivos
 
