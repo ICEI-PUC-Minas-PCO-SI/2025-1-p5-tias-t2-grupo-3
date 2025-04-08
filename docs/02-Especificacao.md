@@ -46,35 +46,27 @@ As tabelas a seguir apresentam os requisitos funcionais e não funcionais que de
 
 ### Requisitos funcionais
 
-|ID    | Descrição do Requisito  | Prioridade |
-|------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+| ID     | Descrição do Requisito                                               | Prioridade |
+|--------|---------------------------------------------------------------------|------------|
+| RF-001 | Permite o registro de uma nova caçamba no sistema com dados como localização, capacidade, data de instalação e status. | ALTA       |
+| RF-002 | Permite que um usuário altere os dados de uma caçamba registrada, como localização, capacidade e status. | ALTA       |
+| RF-003 | Exibe uma lista de caçambas cadastradas no sistema, com informações como ID, localização, capacidade e status. | ALTA       |
+| RF-004 | Permite que o usuário pesquise por caçambas usando filtros como localização, capacidade e status. | ALTA       |
+| RF-005 | Permite a exclusão de caçambas registradas, caso não estejam em uso, removendo permanentemente o registro. | ALTA       |
+| RF-006 | Mantém o registro de todas as alterações feitas nas caçambas, incluindo dados como usuário responsável, data da alteração e campo alterado. | MÉDIA      |
+| RF-007 | Envia notificações por e-mail quando há mudanças no status de caçambas, como de "disponível" para "em uso" ou "em manutenção". | ALTA       |
+| RF-008 | Gera relatórios baseados no uso das caçambas, permitindo a exportação dos dados em formatos como PDF ou CSV. | BAIXA      |
+| RF-009 | Exibe a localização das caçambas em um mapa interativo, permitindo que o usuário visualize a posição geográfica das caçambas cadastradas. | BAIXA      |
+
 
 ### Requisitos não funcionais
 
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em dispositivos móveis | MÉDIA | 
-|RNF-002| Deve processar as requisições do usuário em no máximo 3 segundos |  BAIXA | 
+| ID     | Descrição do Requisito                                               | Prioridade |
+|--------|---------------------------------------------------------------------|------------|
+| RNF-001 | O sistema deverá ser publicado e utilizado em browsers, plataforma web. | ALTA       |
+| RNF-002 | Usuários “Operadores” deverão utilizar o sistema após a execução de um treinamento. | MÉDIA      |
+| RNF-003 | Os dados devem ser protegidos, com backups automáticos periódicos para garantir a integridade e disponibilidade da informação. | BAIXA      |
 
-Com base nas histórias de usuários, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos não funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-
-Lembre-se de que cada requisito deve corresponder a uma e somente uma característica-alvo da sua solução. Além disso, certifique-se de que todos os aspectos capturados nas histórias de usuários foram cobertos.
-
-> **Links úteis**:
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [Entenda o que são requisitos de software, a diferença entre requisito funcional e não funcional, e como identificar e documentar cada um deles](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
 
 ## Restrições
 
