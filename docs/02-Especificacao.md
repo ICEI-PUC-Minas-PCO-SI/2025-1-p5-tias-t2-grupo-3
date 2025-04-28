@@ -62,7 +62,7 @@ O projeto está restrito aos itens apresentados na tabela a seguir.
 
 ## Diagrama de casos de uso
 
-![Trabalho interdiciplinar](https://github.com/user-attachments/assets/c8edc094-0900-4117-a3f9-65b73d2e2e9a)
+![diagrama](./images/diagram.png)
 
 
 > **Links úteis**:
