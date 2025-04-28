@@ -8,9 +8,9 @@ Além disso, o projeto busca sensibilizar a comunidade acadêmica sobre a import
 
 ## Cliente 
 
-Nesta seção, devem ser apresentadas informações essenciais sobre o cliente (parceiro) para garantir um entendimento mais preciso do projeto como uma iniciativa extensionista.  
-
-Recomenda-se incluir dados como missão, visão e valores da organização, além de seu ramo de atuação, porte, nicho de mercado e principais desafios enfrentados. Também é relevante fornecer informações sobre sua localização, histórico, impacto social e possíveis demandas específicas. Quanto mais detalhadas forem essas informações, mais embasada será a análise do contexto, permitindo uma abordagem estratégica e alinhada às necessidades do cliente.
+Nome: Alternativa Transportes LTDA
+Endereço: R. São Dimas, 201 - Kennedy, Betim - MG, 32665-670
+Atividades desenvolvidas: A empresa trabalha com locação de caçambas, coleta, separação e gestão dos materiais nelas contidos.
 
 ## Problema
 
@@ -22,31 +22,20 @@ A aplicação EcoDump será utilizada diretamente por administradores e funcion�
 
 ## Objetivos
 
-Aqui, você deve descrever os objetivos do trabalho, indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima.
+- Desenvolver funcionalidades para o registro detalhado dos resíduos coletados.
+Incluir campos para descrever o tipo, volume e origem dos resíduos descartados em cada caçamba, criando um histórico rastreável e organizado.
 
-Além disso, apresente alguns (pelo menos 3) objetivos específicos, dependendo de onde você pretende concentrar sua prática investigativa ou como deseja aprofundar seu trabalho.
- 
-> **Links úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+- Gerar relatórios gerenciais e indicadores de desempenho.
+Permitir que os administradores consultem relatórios sobre uso de caçambas, tipos de resíduos, tempos médios de coleta e outros dados operacionais.
+
+- Implementar um sistema de rastreamento em tempo real das caçambas.
+Permitir a visualização atualizada da localização e do status de cada caçamba (disponível, em uso, em manutenção), promovendo maior controle logístico e facilitando a alocação adequada dos recursos.
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
-
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+O projeto EcoDump surge da necessidade concreta de modernizar a gestão de resíduos sólidos em uma empresa que atualmente depende de métodos manuais e propensos a erros. A iniciativa atende a uma demanda real do setor e tem impacto direto na eficiência operacional, sustentabilidade ambiental e conformidade legal da empresa parceira, Alternativa Transportes LTDA.
 
 ## Público-alvo
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
+O público-alvo do projeto são as pessoas jurídicas (como empresas de construção civil) e pessoas físicas que contratam o serviço de caçambas da empresa Alternativa Transportes LTDA.
 
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
-
-> **Links úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público-alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
