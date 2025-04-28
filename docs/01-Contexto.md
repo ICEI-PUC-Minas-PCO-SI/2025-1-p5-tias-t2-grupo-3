@@ -23,7 +23,7 @@ A aplicação EcoDump será utilizada diretamente por administradores e funcion�
 ## Objetivos
 
 - Desenvolver funcionalidades para o registro detalhado dos resíduos coletados.
-Incluir campos para descrever o tipo, volume e origem dos resíduos descartados em cada caçamba, criando um histórico rastreável e organizado.
+Incluir campos para descrever o tipo e origem dos resíduos descartados em cada caçamba, criando um histórico rastreável e organizado.
 
 - Gerar relatórios gerenciais e indicadores de desempenho.
 Permitir que os administradores consultem relatórios sobre uso de caçambas, tipos de resíduos, tempos médios de coleta e outros dados operacionais.
@@ -33,7 +33,7 @@ Permitir a visualização atualizada da localização e do status de cada caçam
 
 ## Justificativa
 
-O projeto EcoDump surge da necessidade concreta de modernizar a gestão de resíduos sólidos em uma empresa que atualmente depende de métodos manuais e propensos a erros. A iniciativa atende a uma demanda real do setor e tem impacto direto na eficiência operacional, sustentabilidade ambiental e conformidade legal da empresa parceira, Alternativa Transportes LTDA.
+O projeto EcoDump surge da necessidade concreta de modernizar a gestão de resíduos sólidos em uma empresa que atualmente depende de métodos manuais e propensos a erros. A iniciativa atende a uma demanda real e tem impacto direto na eficiência operacional, sustentabilidade ambiental e conformidade legal da empresa parceira, Alternativa Transportes LTDA.
 
 ## Público-alvo
 
