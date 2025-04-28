@@ -22,14 +22,10 @@ A aplicação EcoDump será utilizada diretamente por administradores e funcion�
 
 ## Objetivos
 
-- Desenvolver funcionalidades para o registro detalhado dos resíduos coletados.
-Incluir campos para descrever o tipo e origem dos resíduos descartados em cada caçamba, criando um histórico rastreável e organizado.
+- Automatizar o registro das movimentações de resíduos no pátio da empresa, substituindo o sistema manual por um processo digital seguro e confiável.
+- Facilitar o acesso e a organização das informações registradas, permitindo a geração rápida de relatórios e a correta emissão dos documentos legais necessários.
+- Reduzir a incidência de falhas humanas, como esquecimentos e erros de anotação, por meio de uma interface simples e acessível para os funcionários.
 
-- Gerar relatórios gerenciais e indicadores de desempenho.
-Permitir que os administradores consultem relatórios sobre uso de caçambas, tipos de resíduos, tempos médios de coleta e outros dados operacionais.
-
-- Implementar um sistema de rastreamento em tempo real das caçambas.
-Permitir a visualização atualizada da localização e do status de cada caçamba (disponível, em uso, em manutenção), promovendo maior controle logístico e facilitando a alocação adequada dos recursos.
 
 ## Justificativa
 
