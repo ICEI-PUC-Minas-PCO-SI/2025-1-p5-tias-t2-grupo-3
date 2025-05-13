@@ -14,9 +14,7 @@ Além disso, não há um histórico centralizado das alterações realizadas nas
 
 ## Descrição geral da proposta (Modelagem TO BE)
 
-Com a implementação do sistema EcoDump, os processos serão digitalizados e centralizados em uma plataforma web intuitiva, segura e acessível apenas por usuários autenticados. Todas as operações relacionadas ao ciclo de vida das caçambas — como cadastro, edição, acompanhamento de status, anexação de documentos, exclusão e geração de relatórios — poderão ser realizadas diretamente no sistema, com validação de dados e registro automático de alterações.
-
-O sistema permitirá a visualização geográfica das caçambas por meio da integração com mapas, o que facilitará o acompanhamento de sua localização em tempo real. Notificações automáticas serão enviadas por e-mail em eventos relevantes (como mudança de status), e os relatórios poderão ser exportados em formatos como PDF ou CSV. Além disso, o controle de permissões por perfil de usuário (administrador ou funcionário) garantirá a segurança e o controle de acesso às funcionalidades sensíveis.
+Com a implementação do sistema EcoDump, os processos serão digitalizados e centralizados em uma plataforma web intuitiva, segura e acessível apenas por usuários autenticados. Todas as operações relacionadas ao ciclo de vida das caçambas — como cadastro, edição, acompanhamento de status, anexação de documentos, exclusão e geração de relatórios — poderão ser realizadas diretamente no sistema, com validação de dados e registro automático de alterações. Além disso, o controle de permissões por perfil de usuário (administrador ou funcionário) garantirá a segurança e o controle de acesso às funcionalidades sensíveis.
 
 Essa transformação proporcionará maior agilidade, transparência e confiabilidade à gestão de caçambas e resíduos, permitindo que a empresa atue com mais eficiência, reduza erros e adote práticas mais sustentáveis e tecnológicas.
 ## Modelagem dos processos
