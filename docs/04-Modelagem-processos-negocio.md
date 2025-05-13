@@ -8,18 +8,17 @@
 
 ## Modelagem da situação atual (Modelagem AS IS)
 
-Apresente uma descrição textual de como os sistemas atuais resolvem o problema que seu projeto se propõe a resolver. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional.
+Atualmente, o processo de controle das caçambas e dos resíduos é realizado de forma manual e descentralizada pela empresa. As informações são registradas em planilhas eletrônicas ou formulários físicos, o que dificulta a padronização dos dados, a rastreabilidade das ações e a eficiência na gestão. O monitoramento da localização das caçambas, seu status (disponível, em uso, em manutenção) e os dados sobre os resíduos descartados dependem da comunicação direta entre funcionários, o que está sujeito a falhas humanas e atrasos.
 
-Com o tema do projeto definido, escolham alguns processos no contexto de negócios. Para ilustrar os potenciais ganhos com a automatização, imaginem processos manuais, ineficientes e/ou com muitas idas e vindas, gerando, assim, retrabalho. Colem aqui os modelos dos processos atuais (modelo AS-IS), elaborados com o apoio da ferramenta baseada em BPMN utilizada na disciplina.
+Além disso, não há um histórico centralizado das alterações realizadas nas caçambas, tampouco relatórios automatizados que auxiliem na tomada de decisões estratégicas. A falta de integração entre os processos e a inexistência de uma interface unificada dificultam o controle operacional, comprometem a produtividade e aumentam os riscos de não conformidade com normas ambientais.
 
 ## Descrição geral da proposta (Modelagem TO BE)
 
-Tendo identificado os gargalos dos modelos AS-IS, apresentem uma descrição da proposta de solução, buscando maior eficiência com a introdução da tecnologia. Abordem também os limites dessa solução e seu alinhamento com as estratégias e objetivos do contexto de negócio escolhido.
+Com a implementação do sistema EcoDump, os processos serão digitalizados e centralizados em uma plataforma web intuitiva, segura e acessível apenas por usuários autenticados. Todas as operações relacionadas ao ciclo de vida das caçambas — como cadastro, edição, acompanhamento de status, anexação de documentos, exclusão e geração de relatórios — poderão ser realizadas diretamente no sistema, com validação de dados e registro automático de alterações.
 
-Cole aqui os modelos da solução proposta (modelo TO-BE), elaborados com o apoio da ferramenta baseada em BPMN utilizada na disciplina. Cada processo identificado deve ter seu modelo TO-BE específico. Descrevam as oportunidades de melhoria de cada processo da solução proposta.
+O sistema permitirá a visualização geográfica das caçambas por meio da integração com mapas, o que facilitará o acompanhamento de sua localização em tempo real. Notificações automáticas serão enviadas por e-mail em eventos relevantes (como mudança de status), e os relatórios poderão ser exportados em formatos como PDF ou CSV. Além disso, o controle de permissões por perfil de usuário (administrador ou funcionário) garantirá a segurança e o controle de acesso às funcionalidades sensíveis.
 
-Apresente aqui uma descrição da sua proposta, abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente também as oportunidades de melhoria.
-
+Essa transformação proporcionará maior agilidade, transparência e confiabilidade à gestão de caçambas e resíduos, permitindo que a empresa atue com mais eficiência, reduza erros e adote práticas mais sustentáveis e tecnológicas.
 ## Modelagem dos processos
 
 [PROCESSO 1 - Nome do processo](./processes/processo-1-nome-do-processo.md "Detalhamento do processo 1.")
