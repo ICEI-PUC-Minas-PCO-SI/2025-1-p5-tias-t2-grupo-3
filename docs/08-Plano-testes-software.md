@@ -8,7 +8,6 @@
 | **Objetivo do teste**   | Verificar se o usuário autenticado consegue registrar uma nova caçamba.                                                                                                                          |
 | **Passos**              | 1. Acessar o sistema com login válido <br> 2. Navegar até a tela "Cadastrar Caçamba" <br> 3. Preencher os campos obrigatórios (localização, capacidade, data, status) <br> 4. Clicar em “Salvar” |
 | **Critério de êxito**   | A nova caçamba é cadastrada e exibida na lista de caçambas.                                                                                                                                      |
-| **Responsável**         | Nome do integrante da equipe                                                                                                                                                                     |
 
 ---
 
@@ -20,7 +19,6 @@
 | **Objetivo do teste**   | Verificar se um usuário autenticado pode editar uma caçamba existente.                                                                                                                                                           |
 | **Passos**              | 1. Acessar a aplicação como usuário autenticado <br> 2. Navegar até a lista de caçambas <br> 3. Clicar em “Editar” na caçamba desejada <br> 4. Alterar os campos (ex: status e capacidade) <br> 5. Clicar em “Salvar alterações” |
 | **Critério de êxito**   | As alterações são salvas e refletidas corretamente na interface.                                                                                                                                                                 |
-| **Responsável**         | Nome do integrante da equipe                                                                                                                                                                                                     |
 
 ---
 
@@ -32,7 +30,6 @@
 | **Objetivo do teste**   | Verificar se um administrador pode excluir uma caçamba que não está em uso.                                                                                               |
 | **Passos**              | 1. Login como administrador <br> 2. Acessar a lista de caçambas <br> 3. Identificar caçamba com status “inativa” <br> 4. Clicar em “Excluir” <br> 5. Confirmar a exclusão |
 | **Critério de êxito**   | A caçamba desaparece da lista e o registro é removido do sistema.                                                                                                         |
-| **Responsável**         | Nome do integrante da equipe                                                                                                                                              |
 
 ---
 
@@ -44,7 +41,6 @@
 | **Objetivo do teste**   | Verificar se o usuário autenticado pode visualizar a lista de todas as caçambas cadastradas.                                                                             |
 | **Passos**              | 1. Acessar o sistema como usuário autenticado <br> 2. Ir até a seção “Lista de caçambas” <br> 3. Observar a apresentação dos dados: ID, localização, capacidade e status |
 | **Critério de êxito**   | A lista é exibida corretamente com todos os campos preenchidos.                                                                                                          |
-| **Responsável**         | Nome do integrante da equipe                                                                                                                                             |
 
 ---
 
@@ -56,7 +52,6 @@
 | **Objetivo do teste**   | Verificar se os filtros funcionam corretamente na busca por caçambas.                                                                                              |
 | **Passos**              | 1. Login no sistema <br> 2. Acessar a funcionalidade de busca <br> 3. Selecionar filtros (ex: localização = “Centro”, status = “Ativa”) <br> 4. Clicar em “Buscar” |
 | **Critério de êxito**   | A busca retorna apenas caçambas que atendem aos critérios escolhidos.                                                                                              |
-| **Responsável**         | Nome do integrante da equipe                                                                                                                                       |
 
 ---
 
@@ -68,7 +63,6 @@
 | **Objetivo do teste**   | Verificar se o mapa mostra corretamente a localização das caçambas cadastradas.                                           |
 | **Passos**              | 1. Login no sistema <br> 2. Navegar até a seção “Mapa” <br> 3. Verificar se os marcadores estão corretamente posicionados |
 | **Critério de êxito**   | Cada caçamba aparece no mapa na localização cadastrada.                                                                   |
-| **Responsável**         | Nome do integrante da equipe                                                                                              |
 
 ---
 
@@ -80,7 +74,6 @@
 | **Objetivo do teste**   | Verificar se o sistema registra e exibe corretamente o histórico de modificações.                                                         |
 | **Passos**              | 1. Login como administrador <br> 2. Acessar uma caçamba que teve alterações <br> 3. Verificar o histórico (usuário, campo alterado, data) |
 | **Critério de êxito**   | O histórico está completo, com todas as informações exigidas.                                                                             |
-| **Responsável**         | Nome do integrante da equipe                                                                                                              |
 
 ---
 
