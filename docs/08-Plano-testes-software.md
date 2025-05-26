@@ -1,42 +1,90 @@
 # Plano de testes de software
 
-<span style="color:red">Pré-requisitos: <a href="02-Especificacao.md"> Especificação do projeto</a></span>, <a href="05-Projeto-interface.md"> Projeto de interface</a>
+#### **Caso de Teste 01 – Registrar nova caçamba**
 
-O plano de testes de software é gerado a partir da especificação do sistema e consiste em casos de teste que deverão ser executados quando a implementação estiver parcial ou totalmente pronta. Apresente os cenários de teste utilizados na realização dos testes da sua aplicação. Escolha cenários de teste que demonstrem os requisitos sendo satisfeitos.
+| **Caso de teste**       | CT-001 – Registrar nova caçamba                                                                                                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Requisito associado** | RF-001 - Permite o registro de uma nova caçamba no sistema com dados como localização, capacidade, data de instalação e status.                                                                  |
+| **Objetivo do teste**   | Verificar se o usuário autenticado consegue registrar uma nova caçamba.                                                                                                                          |
+| **Passos**              | 1. Acessar o sistema com login válido <br> 2. Navegar até a tela "Cadastrar Caçamba" <br> 3. Preencher os campos obrigatórios (localização, capacidade, data, status) <br> 4. Clicar em “Salvar” |
+| **Critério de êxito**   | A nova caçamba é cadastrada e exibida na lista de caçambas.                                                                                                                                      |
+| **Responsável**         | Nome do integrante da equipe                                                                                                                                                                     |
 
-Enumere quais cenários de testes foram selecionados para teste. Neste tópico, o grupo deve detalhar quais funcionalidades foram avaliadas, o grupo de usuários que foi escolhido para participar do teste e as ferramentas utilizadas.
+---
 
-Não deixe de enumerar os casos de teste de forma sequencial e garantir que o(s) requisito(s) associado(s) a cada um deles esteja(m) correto(s) — de acordo com o que foi definido na <a href="02-Especificacao.md">Especificação do projeto</a>.
+#### **Caso de Teste 02 – Editar dados da caçamba**
 
-Por exemplo:
+| **Caso de teste**       | CT-002 – Editar dados da caçamba                                                                                                                                                                                                 |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Requisito associado** | RF-002 - Permite alteração de dados de uma caçamba registrada.                                                                                                                                                                   |
+| **Objetivo do teste**   | Verificar se um usuário autenticado pode editar uma caçamba existente.                                                                                                                                                           |
+| **Passos**              | 1. Acessar a aplicação como usuário autenticado <br> 2. Navegar até a lista de caçambas <br> 3. Clicar em “Editar” na caçamba desejada <br> 4. Alterar os campos (ex: status e capacidade) <br> 5. Clicar em “Salvar alterações” |
+| **Critério de êxito**   | As alterações são salvas e refletidas corretamente na interface.                                                                                                                                                                 |
+| **Responsável**         | Nome do integrante da equipe                                                                                                                                                                                                     |
 
-| **Caso de teste**  | **CT-001 – Cadastrar perfil**  |
-|:---: |:---: |
-| Requisito associado | RF-00X - A aplicação deve apresentar, na página principal, a funcionalidade de cadastro de usuários para que estes consigam criar e gerenciar seu perfil. |
-| Objetivo do teste | Verificar se o usuário consegue se cadastrar na aplicação. |
-| Passos | - Acessar o navegador <br> - Informar o endereço do site https://adota-pet.herokuapp.com/src/index.html <br> - Clicar em "Criar conta" <br> - Preencher os campos obrigatórios (e-mail, nome, sobrenome, celular, CPF, senha, confirmação de senha) <br> - Aceitar os termos de uso <br> - Clicar em "Registrar" |
-| Critério de êxito | - O cadastro foi realizado com sucesso. |
-| Responsável pela elaboração do caso de teste | Nome do integrante da equipe. |
+---
 
-<br>
+#### **Caso de Teste 03 – Excluir caçamba inativa**
 
-| **Caso de teste**  | **CT-002 – Efetuar login**  |
-|:---: |:---: |
-| Requisito associado | RF-00Y - A aplicação deve possuir opção de fazer login, sendo o login o endereço de e-mail. |
-| Objetivo do teste | Verificar se o usuário consegue realizar login. |
-| Passos | - Acessar o navegador <br> - Informar o endereço do site https://adota-pet.herokuapp.com/src/index.html <br> - Clicar no botão "Entrar" <br> - Preencher o campo de e-mail <br> - Preencher o campo de senha <br> - Clicar em "Login" |
-| Critério de êxito | - O login foi realizado com sucesso. |
-| Responsável pela elaboração do caso de teste | Nome do integrante da equipe. |
+| **Caso de teste**       | CT-003 – Excluir caçamba não utilizada                                                                                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Requisito associado** | RF-005 - Permite exclusão de caçambas não utilizadas.                                                                                                                     |
+| **Objetivo do teste**   | Verificar se um administrador pode excluir uma caçamba que não está em uso.                                                                                               |
+| **Passos**              | 1. Login como administrador <br> 2. Acessar a lista de caçambas <br> 3. Identificar caçamba com status “inativa” <br> 4. Clicar em “Excluir” <br> 5. Confirmar a exclusão |
+| **Critério de êxito**   | A caçamba desaparece da lista e o registro é removido do sistema.                                                                                                         |
+| **Responsável**         | Nome do integrante da equipe                                                                                                                                              |
 
+---
 
-## Ferramentas de testes (opcional)
+#### **Caso de Teste 04 – Visualizar lista de caçambas**
 
-Comente sobre as ferramentas de testes utilizadas.
- 
-> **Links úteis**:
-> - [IBM - criação e geração de planos de teste](https://www.ibm.com/developerworks/br/local/rational/criacao_geracao_planos_testes_software/index.html)
-> - [Práticas e técnicas de testes ágeis](http://assiste.serpro.gov.br/serproagil/Apresenta/slides.pdf)
-> - [Teste de software: conceitos e tipos de testes](https://blog.onedaytesting.com.br/teste-de-software/)
-> - [Criação e geração de planos de teste de software](https://www.ibm.com/developerworks/br/local/rational/criacao_geracao_planos_testes_software/index.html)
-> - [Ferramentas de teste para JavaScript](https://geekflare.com/javascript-unit-testing/)
-> - [UX Tools](https://uxdesign.cc/ux-user-research-and-user-testing-tools-2d339d379dc7)
+| **Caso de teste**       | CT-004 – Listar caçambas cadastradas                                                                                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Requisito associado** | RF-003 - Exibe lista de caçambas cadastradas com suas informações.                                                                                                       |
+| **Objetivo do teste**   | Verificar se o usuário autenticado pode visualizar a lista de todas as caçambas cadastradas.                                                                             |
+| **Passos**              | 1. Acessar o sistema como usuário autenticado <br> 2. Ir até a seção “Lista de caçambas” <br> 3. Observar a apresentação dos dados: ID, localização, capacidade e status |
+| **Critério de êxito**   | A lista é exibida corretamente com todos os campos preenchidos.                                                                                                          |
+| **Responsável**         | Nome do integrante da equipe                                                                                                                                             |
+
+---
+
+#### **Caso de Teste 05 – Buscar caçambas com filtros**
+
+| **Caso de teste**       | CT-005 – Pesquisar caçambas por filtros                                                                                                                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Requisito associado** | RF-004 - Permite busca com filtros como localização, capacidade e status.                                                                                          |
+| **Objetivo do teste**   | Verificar se os filtros funcionam corretamente na busca por caçambas.                                                                                              |
+| **Passos**              | 1. Login no sistema <br> 2. Acessar a funcionalidade de busca <br> 3. Selecionar filtros (ex: localização = “Centro”, status = “Ativa”) <br> 4. Clicar em “Buscar” |
+| **Critério de êxito**   | A busca retorna apenas caçambas que atendem aos critérios escolhidos.                                                                                              |
+| **Responsável**         | Nome do integrante da equipe                                                                                                                                       |
+
+---
+
+#### **Caso de Teste 06 – Visualizar caçambas em mapa**
+
+| **Caso de teste**       | CT-006 – Visualização no mapa interativo                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Requisito associado** | RF-008 - Exibe localização das caçambas em um mapa interativo.                                                            |
+| **Objetivo do teste**   | Verificar se o mapa mostra corretamente a localização das caçambas cadastradas.                                           |
+| **Passos**              | 1. Login no sistema <br> 2. Navegar até a seção “Mapa” <br> 3. Verificar se os marcadores estão corretamente posicionados |
+| **Critério de êxito**   | Cada caçamba aparece no mapa na localização cadastrada.                                                                   |
+| **Responsável**         | Nome do integrante da equipe                                                                                              |
+
+---
+
+#### **Caso de Teste 07 – Histórico de alterações**
+
+| **Caso de teste**       | CT-007 – Acessar histórico de alterações                                                                                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Requisito associado** | RF-006 - Mantém registro de alterações feitas nas caçambas.                                                                               |
+| **Objetivo do teste**   | Verificar se o sistema registra e exibe corretamente o histórico de modificações.                                                         |
+| **Passos**              | 1. Login como administrador <br> 2. Acessar uma caçamba que teve alterações <br> 3. Verificar o histórico (usuário, campo alterado, data) |
+| **Critério de êxito**   | O histórico está completo, com todas as informações exigidas.                                                                             |
+| **Responsável**         | Nome do integrante da equipe                                                                                                              |
+
+---
+
+### 👥 Grupo de usuários envolvidos
+
+* **Usuários autenticados**: testar os fluxos de registro, edição, visualização e busca de caçambas.
+* **Administradores**: validar funcionalidades exclusivas como exclusão, notificações, histórico e relatórios.
