@@ -15,11 +15,11 @@ import {
 } from "@/components/ui/sidebar";
 
 const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
+  // {
+  //   title: "Home",
+  //   url: "/",
+  //   icon: Home,
+  // },
   {
     title: "Alugueis",
     url: "/rent",
@@ -42,11 +42,11 @@ const items = [
   }
 ];
 
-export function AppSidebar() {
+const AppSidebar = () => {
   return (
     <Sidebar>
       <SidebarHeader>
-        <img src={logo} alt="logo" className="w-52 py-2" />
+        <img src={logo} alt="logo" className=" w-44 py-2" />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -73,9 +73,11 @@ export function AppSidebar() {
                 <CircleUserRound className="size-5" />
                 <span className="text-sm font-semibold">Usuário</span>
             </div>
-            <LogOut className="size-5 cursor-pointer hover:text-gray-500"/>
+            <LogOut className="size-4 cursor-pointer hover:text-gray-500"/>
         </div>
       </SidebarFooter>
     </Sidebar>
   );
 }
+
+export default AppSidebar;

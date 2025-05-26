@@ -1,12 +1,22 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import Home from "@/pages/Home";
 import { Layout } from "@/components";
-import Dumpsters from "@/pages/Dumpsters";
-import Operations from "@/pages/Operations";
-import Rent from "@/pages/Rent";
+import Home from "@/pages/Home";
+import Dumpsters from "@/pages/dumpsters";
 import Residues from "@/pages/Residues";
+import Operations from "@/pages/operations";
+import Rent from "@/pages/rent";
+import SignIn from "@/pages/sign/sign-in";
+import SignUp from "@/pages/sign/sign-up";
 
 const router = createBrowserRouter([
+  {
+    path: "/sign-in",
+    element: <SignIn />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
   {
     path: "/",
     element: (
@@ -27,7 +37,7 @@ const router = createBrowserRouter([
     path: "/operations",
     element: (
       <Layout>
-        <Operations/>
+        <Operations />
       </Layout>
     ),
   },
@@ -35,7 +45,7 @@ const router = createBrowserRouter([
     path: "/rent",
     element: (
       <Layout>
-        <Rent/>
+        <Rent />
       </Layout>
     ),
   },
@@ -43,10 +53,10 @@ const router = createBrowserRouter([
     path: "/residues",
     element: (
       <Layout>
-        <Residues/>
+        <Residues />
       </Layout>
-    )
-  }
+    ),
+  },
 ]);
 
 export default function AppRouter() {
