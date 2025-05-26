@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
-import { DataTable } from "../operations/table/dataTable";
-import { columns, data } from "../operations/table/columns";
+import { DataTable } from "./table/dataTable";
+import { columns, data } from "./table/columns";
 import { Button } from "@/components/ui/button";
 
 const Operations = () => {
