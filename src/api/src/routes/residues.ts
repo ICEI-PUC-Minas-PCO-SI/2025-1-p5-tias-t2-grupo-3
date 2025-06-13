@@ -20,5 +20,19 @@ export const residueRoutes = async (app: FastifyInstance) => {
     } catch (error) {
       reply.status(500).send({ error: "Internal Server Error" });
     }
+  });
+
+  app.put("/:id", async (request, reply) => {
+    try {
+      const { id } = request.params as { id: string };
+      const data = request.body as residues;
+      const residue = await db.residues.update({
+        where: { id: Number(id) },
+        data,
+      });
+      return reply.send(residue); 
+    } catch (error) {
+      reply.status(500).send({ error: "Internal Server Error" });
+    }
   })
 }
