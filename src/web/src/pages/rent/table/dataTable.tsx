@@ -98,7 +98,13 @@ export function DataTable<TData, TValue>({
                       column.toggleVisibility(!!value)
                     }
                   >
-                    {column.id}
+                    {(column.id === "id" && "Código") ||
+                      (column.id === "client_id" && "Código do Cliente") ||
+                      (column.id === "dumpster_id" && "Código da Caçamba") ||
+                       (column.id === "residue_id" && "Código do Residuo") ||
+                        (column.id === "rent_date" && "Data do Aluguel") ||
+                         (column.id === "delivery_date" && "Data da Entrega") ||
+                      (column.id === "status" && "Status")}
                   </DropdownMenuCheckboxItem>
                 )
               })}

@@ -9,112 +9,132 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { useState } from "react";
+import { StatusLabel } from "@/components/StatusLabel";
+import { formatDate } from "@/utils/fomatDate";
+import ModalEditOperations from "@/components/modals/ModalEditOperations"
 
-export const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@example.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@example.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@example.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@example.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@example.com",
-  },
-]
-
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
+export type Operations = {
+  id: number;
+  rent_id: number;
+  driver_name: string;
+  operation_type: string;
+  date: Date;
+  location:string;
+  destintion:string;
+  comments:string;
+  status_id:number;
+  created_by_user:number;
+  updated_by_user:number;
 };
 
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Operations>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
-  },
-  {
-    accessorKey: "email",
+    accessorKey: "id",
+    
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Código
           <ArrowUpDown />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
+    accessorKey: "rent_id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Codigo do Aluguel
+          <ArrowUpDown />
+        </Button>
+      )
     },
+    cell: ({ row }) => <div>{row.getValue("rent_id")}</div>,
+  },
+  {
+    accessorKey: "driver_name",
+    header: () => <div className="text-center">Nome do Motorista</div>,
+    cell: ({ row }) => row.getValue("driver_name")
+  },
+  {
+    accessorKey: "operation_type",
+    header: () => <div className="text-center">Tipo de Operação</div>,
+    cell: ({ row }) => row.getValue("operation_type")
+  },
+  {
+    accessorKey: "date",
+    header: () => <div className="text-center">Data</div>,
+    cell: ({ row }) => formatDate(row.getValue("date"))
+  },
+   {
+    accessorKey: "location",
+    header: () => <div className="text-center">Localização</div>,
+    cell: ({ row }) => (row.getValue("location"))
+  },
+   {
+    accessorKey: "destination",
+    header: () => <div className="text-center">Destino</div>,
+    cell: ({ row }) => (row.getValue("destination"))
+  },
+   {
+    accessorKey: "comments",
+    header: () => <div className="text-center">Comentarios</div>,
+    cell: ({ row }) => (row.getValue("comments"))
+  },
+  {
+    accessorKey: "status_id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <ArrowUpDown />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      const status = row.getValue("status_id") ? "active" : "inactive"
+      return <StatusLabel status={status} />
+    }
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const [open, setOpen] = useState(false)
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.email)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Abrir menu</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Ações</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => setOpen(true)}>Editar</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <ModalEditOperations
+            open={open}
+            setOpen={setOpen}
+            data={row.original}
+          /> 
+        </>
       )
     },
   },

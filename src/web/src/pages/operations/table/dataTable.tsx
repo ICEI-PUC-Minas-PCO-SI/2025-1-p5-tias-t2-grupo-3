@@ -98,7 +98,15 @@ export function DataTable<TData, TValue>({
                       column.toggleVisibility(!!value)
                     }
                   >
-                    {column.id}
+                    {(column.id === "id" && "Código") ||
+                      (column.id === "rent_id" && "Código do Aluguel") ||
+                      (column.id === "driver_name" && "Nome do Motorista") ||
+                       (column.id === "operation_type" && "Tipo de Operação") ||
+                        (column.id === "date" && "Data") ||
+                         (column.id === "location" && "Localização") ||
+                      (column.id === "destination" && "Destino") ||
+                       (column.id === "comments" && "Comentarios") ||
+                        (column.id === "status_id" && "Status")}
                   </DropdownMenuCheckboxItem>
                 )
               })}

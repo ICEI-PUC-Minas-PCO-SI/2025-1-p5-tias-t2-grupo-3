@@ -13,7 +13,7 @@ app.register(dumpsterRoutes, { prefix: '/api/dumpsters' });
 app.register(userRoutes, { prefix: '/api/users' });
 app.register(residueRoutes, { prefix: '/api/residues' });
 app.register(operationRoutes, { prefix: '/api/operations' });
-app.register(rentRoutes, { prefix: '/api/rent' })
+app.register(rentRoutes, { prefix: '/api/rents' })
 
 app.register(require('@fastify/cors'), {
   origin: '*',

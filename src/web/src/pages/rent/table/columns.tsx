@@ -9,112 +9,121 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import Rent from "..";
+import { StatusLabel } from "@/components/StatusLabel";
+import { useState } from "react";
+import { formatDate } from "@/utils/fomatDate";
+import ModalEditRent from "@/components/modals/ModalEditRent";
 
-export const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@example.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@example.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@example.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@example.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@example.com",
-  },
-]
-
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
+export type Rent = {
+  id: number;
+  client_id: number;
+  dumpster_id: number;
+  residue_id: number;
+  rent_date: Date;
+  delivery_date:Date;
+  status_id:number;
+  created_by_user:number;
+  updated_by_user:number;
 };
 
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Rent>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
-  },
-  {
-    accessorKey: "email",
+    accessorKey: "id",
+    
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Código
           <ArrowUpDown />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
+    accessorKey: "client_id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Codigo do Cliente
+          <ArrowUpDown />
+        </Button>
+      )
     },
+    cell: ({ row }) => <div>{row.getValue("client_id")}</div>,
+  },
+  {
+    accessorKey: "dumpster_id",
+    header: () => <div className="text-center">Codigo de Caçamba</div>,
+    cell: ({ row }) => row.getValue("dumpster_id")
+  },
+  {
+    accessorKey: "residue_id",
+    header: () => <div className="text-center">Codigo de Residuo</div>,
+    cell: ({ row }) => row.getValue("residue_id")
+  },
+  {
+    accessorKey: "rent_date",
+    header: () => <div className="text-center">Data de Locação</div>,
+    cell: ({ row }) => formatDate(row.getValue("rent_date"))
+  },
+   {
+    accessorKey: "delivery_date",
+    header: () => <div className="text-center">Data da Entrega</div>,
+    cell: ({ row }) => formatDate(row.getValue("delivery_date"))
+  },
+  {
+    accessorKey: "status_id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <ArrowUpDown />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      const status = row.getValue("status_id") ? "active" : "inactive"
+      return <StatusLabel status={status} />
+    }
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const [open, setOpen] = useState(false)
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Abrir menu</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Ações</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => setOpen(true)}>Editar</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <ModalEditRent
+            open={open}
+            setOpen={setOpen}
+            data={row.original}
+          /> 
+        </>
       )
     },
   },

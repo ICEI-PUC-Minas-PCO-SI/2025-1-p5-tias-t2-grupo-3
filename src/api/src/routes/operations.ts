@@ -21,4 +21,17 @@ export const operationRoutes = async (app: FastifyInstance) => {
       reply.status(500).send(error)
     }
   })
+  app.put("/:id", async (request, reply) => {
+      try {
+        const { id } = request.params as { id: string };
+        const data = request.body as operations;
+        const operation = await db.operations.update({
+          where: { id: parseInt(id) },
+          data,
+        });
+        reply.send(operation);
+      } catch (error) {
+        reply.status(500).send(error);
+      }
+    });
 }
