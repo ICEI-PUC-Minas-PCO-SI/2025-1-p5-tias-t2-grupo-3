@@ -1,4 +1,4 @@
-import { Home, BadgeDollarSign, Recycle, Truck, MonitorCog, CircleUserRound, LogOut  } from "lucide-react";
+import { BadgeDollarSign, Recycle, Truck, MonitorCog, CircleUserRound, LogOut  } from "lucide-react";
 import logo from "@/assets/sidebarLogo.png";
 
 import {
