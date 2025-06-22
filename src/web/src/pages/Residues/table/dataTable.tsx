@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { CSVExportButton } from "@/components/CSVExportButton"
 import type { IDataTable } from "@/interfaces/IDataTable"
 
 export type Payment = {
@@ -84,9 +85,15 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
+        <div className="ml-auto flex gap-2">
+          <CSVExportButton
+            data={table.getFilteredRowModel().rows.map(row => row.original)}
+            columns={columns}
+            filename="residuos"
+          />
+          <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline">
               Colunas <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
@@ -112,6 +119,7 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
