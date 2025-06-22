@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { db } from "../../db";
+import { db } from "../db";
 import { createRentService } from "../services";
 import moment from "moment";
 

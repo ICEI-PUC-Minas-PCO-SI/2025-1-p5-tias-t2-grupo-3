@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { db } from "../../db";
+import { db } from "../db";
 import { residues } from "../generated/prisma";
 
 export const residueRoutes = async (app: FastifyInstance) => {

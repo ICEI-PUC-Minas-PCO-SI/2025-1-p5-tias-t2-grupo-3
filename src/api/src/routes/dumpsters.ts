@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { db } from "../../db";
+import { db } from "../db";
 import { dumpsters } from "../generated/prisma";
 
 export const dumpsterRoutes = async (app: FastifyInstance) => {
