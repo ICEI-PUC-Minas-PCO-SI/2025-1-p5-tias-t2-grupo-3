@@ -27,7 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CSVExportButton } from "@/components/CSVExportButton";
+import { AdminCSVExportButton } from "@/components/AdminCSVExportButton";
 import type { IDataTable } from "@/interfaces/IDataTable";
 
 export function DataTable<TData, TValue>({
@@ -79,7 +79,7 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
         <div className="ml-auto flex gap-2">
-          <CSVExportButton
+          <AdminCSVExportButton
             data={table.getFilteredRowModel().rows.map(row => row.original)}
             columns={columns}
             filename="cacambas"
