@@ -7,10 +7,13 @@ exports.db = void 0;
 const client_1 = require("@prisma/client");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const isDevelopment = process.env.NODE_ENV === "development";
-const databaseUrl = isDevelopment
-    ? `postgresql://matheus:Amarelo1@@localhost:5432/bravos`
-    : process.env.DATABASE_URL;
+//postgresql://matheus:Amarelo1@@localhost:5432/bravos
+const databaseUrl = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+    throw new Error('DATABASE_URL environment variable is not set');
+}
+
 exports.db = new client_1.PrismaClient({
     datasources: {
         db: {
