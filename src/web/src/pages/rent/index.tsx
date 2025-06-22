@@ -33,7 +33,7 @@ const Rent = () => {
       <div className="flex flex-col gap-5">
         <section className="page-header">
           <h1 className="text-lg font-semibold text-gray-600 flex items-center gap-1">
-            Aluguéis <span className="text-sm">({data.length})</span>
+            Alugueis <span className="text-sm">({data.length})</span>
           </h1>
 
           <ModalCreateRents />

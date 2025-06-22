@@ -9,9 +9,10 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { StatusLabel } from "@/components/StatusLabel";
+import { StatusLabel, type StatusType } from "@/components/StatusLabel";
 import { useState } from "react";
 import ModalEditResidues from "@/components/modals/ModalEditResidues";
+import { statuses } from "@/utils/status";
 
 export type Residues = {
   id: number;
@@ -66,8 +67,8 @@ export const columns: ColumnDef<Residues>[] = [
       )
     },
     cell: ({ row }) => {
-      const status = row.getValue("status") ? "active" : "inactive"
-      return <StatusLabel status={status} />
+      const status = statuses[row.getValue("status") as keyof typeof statuses]
+      return <StatusLabel status={status as StatusType} />
     }
   },
   {

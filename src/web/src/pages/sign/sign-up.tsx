@@ -1,10 +1,9 @@
 import { useState, type FormEvent } from 'react';
 import { Input } from '@/components/ui/input';
 import { Eye, EyeOff, Loader } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router';
 import { toast } from 'sonner';
 import api from '@/api';
-import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');

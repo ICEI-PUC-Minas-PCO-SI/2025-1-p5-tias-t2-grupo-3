@@ -27,7 +27,7 @@ import type { IDumpsters } from "@/interfaces/IDumpsters";
 import { toast } from "sonner";
 
 const ModalCreateDumpsters = () => {
-  const { handleSubmit, register, control } = useForm({
+  const { handleSubmit, register, control, reset } = useForm({
     defaultValues: {
       status: true,
       identifier_number: "",
@@ -51,7 +51,7 @@ const ModalCreateDumpsters = () => {
       queryClient.setQueryData(["dumpsters"], (old: any[] = []) => {
         return [...old, response.data];
       });
-      console.log(response.data);
+      reset();
       toast.success("Caçamba criada com sucesso"); 
       setOpen(false);
     } catch (error) {

@@ -1,8 +1,8 @@
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router";
 import { Layout } from "@/components";
 import Home from "@/pages/Home";
 import Dumpsters from "@/pages/dumpsters";
-import Residues from "@/pages/residues";
+import Residues from "@/pages/Residues";
 import Operations from "@/pages/operations";
 import Rent from "@/pages/rent";
 import SignIn from "@/pages/sign/sign-in";

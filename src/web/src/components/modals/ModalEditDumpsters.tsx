@@ -32,7 +32,6 @@ const ModalEditDumpsters = ({
   data: IDumpsters;
   setOpen: (open: boolean) => void;
 }) => {
-  console.log(dumpster, 'dumpster');
   const { handleSubmit, register, control } = useForm({
     defaultValues: {
       status: dumpster.status,
@@ -62,7 +61,7 @@ const ModalEditDumpsters = ({
       });
       setOpen(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -71,7 +70,7 @@ const ModalEditDumpsters = ({
       <DialogContent className="sm:max-w-[500px]">
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <DialogHeader>
-            <DialogTitle>Criar Caçamba</DialogTitle>
+            <DialogTitle>Editar Caçamba</DialogTitle>
             <DialogDescription>
               Clique em salvar quando você terminar.
             </DialogDescription>

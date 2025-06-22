@@ -59,7 +59,7 @@ const ModalEditResidues = ({
       });
       setOpen(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -68,7 +68,7 @@ const ModalEditResidues = ({
       <DialogContent className="sm:max-w-[500px]">
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <DialogHeader>
-            <DialogTitle>Criar Caçamba</DialogTitle>
+            <DialogTitle>Editar Resíduo</DialogTitle>
             <DialogDescription>
               Clique em salvar quando você terminar.
             </DialogDescription>

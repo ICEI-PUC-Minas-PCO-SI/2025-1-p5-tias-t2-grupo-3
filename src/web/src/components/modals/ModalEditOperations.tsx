@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import moment from "moment";
 import {
   Select,
   SelectContent,
@@ -21,37 +22,54 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm, Controller } from "react-hook-form";
 import { queryClient } from "@/lib/react-query";
-import type {IOperation} from "@/interfaces/IOperation";
+import type { IOperation } from "@/interfaces/IOperation";
+import { StatusLabel } from "../StatusLabel";
+import { useStatuses } from "@/hooks/useStatuses";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { CalendarIcon } from "lucide-react";
+import { format } from "date-fns";
+import { Calendar } from "../ui/calendar";
+import { ptBR } from "date-fns/locale";
+import { useRef, useState } from "react";
 
 const ModalEditOperations = ({
   open,
   setOpen,
-  data: operation
+  data: operation,
 }: {
   open: boolean;
-  data: IOperation;
+  data: Partial<IOperation>;
   setOpen: (open: boolean) => void;
 }) => {
- 
-  const { handleSubmit, register, control } = useForm({
+  const { statuses } = useStatuses();
+  const [deliveryDate, setDeliveryDate] = useState<Date | undefined>(operation.date || undefined);
+  const dropdown = useRef<React.ComponentProps<typeof Calendar>["captionLayout"]>("dropdown");
+  const { handleSubmit, register, control, reset } = useForm({
     defaultValues: {
+      rent_id: operation.rent_id,
+      driver_name: operation.driver_name,
+      operation_type: operation.operation_type,
       date: operation.date,
       location: operation.location,
       destination: operation.destination,
-     comments: operation.comments,
-     status_id: operation.status
-    }
+      comments: operation.comments,
+      status_id: operation.status_id,
+    },
   });
 
   const handleSubmitForm = async (data: Partial<IOperation>) => {
+    const formattedDate = moment(data?.date, 'DD/MM/YYYY').format("YYYY-MM-DD");
+    
     try {
       const response = await api.put(`/operations/${operation.id}`, {
-        status: data.status == "1" ? true : false,
-        date: operation.Date,
-        location: operation.location,
-        destination: operation.destination,
-        comments: operation.comments,
-        status_id: operation.status
+        status_id: data.status_id,
+        date: formattedDate.includes("Invalid date") ? operation.date : formattedDate,
+        rent_id: operation.rent_id,
+        driver_name: operation.driver_name,
+        operation_type: operation.operation_type,
+        location: data.location,
+        destination: data.destination,
+        comments: data.comments,
       });
       queryClient.setQueryData(["operations"], (old: any[] = []) => {
         return old.map((item) => {
@@ -61,9 +79,10 @@ const ModalEditOperations = ({
           return item;
         });
       });
+      reset();
       setOpen(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -80,12 +99,44 @@ const ModalEditOperations = ({
           <div className="grid gap-4 mt-3">
             <div className="grid gap-3">
               <Label htmlFor="date">Data</Label>
-              <Input
-                id="date"
-                placeholder="Digite uma nova data."
-                required
-                {...register("date")}
-              />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    data-empty={!deliveryDate}
+                    className="data-[empty=true]:text-muted-foreground w-full justify-start text-left font-normal"
+                  >
+                    <CalendarIcon />
+                    {deliveryDate ? (
+                      format(deliveryDate, "PPP")
+                    ) : (
+                      <span>Selecione uma data</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Controller
+                    name="date"
+                    control={control}
+                    render={({ field }) => (
+                      <Calendar
+                        mode="single"
+                        defaultMonth={deliveryDate}
+                        selected={field.value || deliveryDate}
+                        onSelect={(date) => {
+                          setDeliveryDate(date);
+                          field.onChange(
+                            date ? format(date, "dd/MM/yyyy") : ""
+                          );
+                        }}
+                        captionLayout={dropdown.current}
+                        className="rounded-lg border shadow-sm"
+                        locale={ptBR}
+                      />
+                    )}
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
             <div className="grid gap-3">
               <Label htmlFor="location">Localização</Label>
@@ -96,7 +147,7 @@ const ModalEditOperations = ({
                 {...register("location")}
               />
             </div>
-             <div className="grid gap-3">
+            <div className="grid gap-3">
               <Label htmlFor="destination">Destino</Label>
               <Input
                 id="destination"
@@ -105,7 +156,7 @@ const ModalEditOperations = ({
                 {...register("destination")}
               />
             </div>
-             <div className="grid gap-3">
+            <div className="grid gap-3">
               <Label htmlFor="comments">Comentario</Label>
               <Input
                 id="comments"
@@ -115,23 +166,29 @@ const ModalEditOperations = ({
               />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="status">Status</Label>
+              <Label htmlFor="status_id">Status</Label>
               <Controller
-                name="status"
+                name="status_id"
                 control={control}
                 render={({ field }) => (
                   <Select
-                    defaultValue={field.value == true ? "1" : "0"}
+                    defaultValue={String(field.value)}
                     onValueChange={field.onChange}
                     required
                   >
-                    <SelectTrigger className="w-full" id="status">
-                      <SelectValue placeholder="Selecione o Status" />
+                    <SelectTrigger className="w-full" id="status_id">
+                      <SelectValue placeholder="Selecione o status" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="1">Ativo</SelectItem>
-                        <SelectItem value="0">Inativo</SelectItem>
+                        {statuses.map((status: any) => (
+                          <SelectItem
+                            key={String(status.id)}
+                            value={String(status.id)}
+                          >
+                            <StatusLabel status={status.code} />
+                          </SelectItem>
+                        ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>

@@ -10,8 +10,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
-import { StatusLabel } from "@/components/StatusLabel";
+import { StatusLabel, type StatusType } from "@/components/StatusLabel";
 import { formatDate } from "@/utils/fomatDate";
+import { statuses } from "@/utils/status";
 import ModalEditOperations from "@/components/modals/ModalEditOperations"
 
 export type Operations = {
@@ -53,7 +54,7 @@ export const columns: ColumnDef<Operations>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Codigo do Aluguel
+          Código do Aluguel
           <ArrowUpDown />
         </Button>
       )
@@ -104,8 +105,8 @@ export const columns: ColumnDef<Operations>[] = [
       )
     },
     cell: ({ row }) => {
-      const status = row.getValue("status_id") ? "active" : "inactive"
-      return <StatusLabel status={status} />
+      const status = statuses[row.getValue("status_id") as keyof typeof statuses]
+      return <StatusLabel status={status as StatusType} />
     }
   },
   {

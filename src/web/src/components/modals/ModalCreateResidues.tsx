@@ -27,7 +27,7 @@ import { toast } from "sonner";
 import type { IResidues } from "@/interfaces/IResidues";
 
 const ModalCreateResidues = () => {
-  const { handleSubmit, register, control } = useForm({
+  const { handleSubmit, register, control, reset } = useForm({
     defaultValues: {
       status: true,
       name: "",
@@ -49,7 +49,7 @@ const ModalCreateResidues = () => {
       queryClient.setQueryData(["residues"], (old: any[] = []) => {
         return [...old, response.data];
       });
-      console.log(response.data);
+      reset();
       toast.success("Resíduo criado com sucesso");
       setOpen(false);
     } catch (error) {

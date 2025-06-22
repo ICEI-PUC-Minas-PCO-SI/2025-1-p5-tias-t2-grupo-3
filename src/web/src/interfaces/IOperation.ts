@@ -7,7 +7,7 @@ export interface IOperation {
   location: string;
   destination: string;
   comments: string;
-   status_id: number;
+  status_id: number;
   created_by_user: number;
   updated_by_user: number;
 }

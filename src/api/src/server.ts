@@ -5,15 +5,17 @@ import { userRoutes } from './routes/users';
 import { residueRoutes } from './routes/residues';
 import { operationRoutes } from './routes/operations';
 import { rentRoutes } from './routes/rent';
+import { statusRoutes } from './routes/statuses';
 
 dotenv.config(); 
 
-const app = Fastify({ logger: true });
+const app = Fastify();
 app.register(dumpsterRoutes, { prefix: '/api/dumpsters' });
 app.register(userRoutes, { prefix: '/api/users' });
 app.register(residueRoutes, { prefix: '/api/residues' });
 app.register(operationRoutes, { prefix: '/api/operations' });
 app.register(rentRoutes, { prefix: '/api/rents' })
+app.register(statusRoutes, { prefix: '/api/statuses' })
 
 app.register(require('@fastify/cors'), {
   origin: '*',

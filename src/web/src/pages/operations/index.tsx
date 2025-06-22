@@ -6,15 +6,12 @@ import { Loading } from "@/components/Loading"
 import { toast } from "sonner"
 import  api  from "@/api"
 
-
-
 const getOperations = async () => {
   const response = await api.get("/operations")
   return response.data
 }
 
 const Operations = () => {
- 
   const {
     data = [],
     isLoading,

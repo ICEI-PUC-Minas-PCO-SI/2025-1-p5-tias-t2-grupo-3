@@ -1,8 +1,11 @@
-type StatusType = 'active' | 'inactive';
+export type StatusType = 'active' | 'inactive' | 'pending' | 'completed' | 'canceled';
 
 const statuses = {
   active: { label: "Ativo", color: "bg-green-500"},
   inactive: { label: "Inativo", color: "bg-red-500"},
+  pending: { label: "Pendente", color: "bg-yellow-500"},
+  completed: { label: "Concluído", color: "bg-blue-500"},
+  canceled: { label: "Cancelado", color: "bg-gray-500"},
 }
 
 export const StatusLabel = ({ status }: { status: StatusType }) => {

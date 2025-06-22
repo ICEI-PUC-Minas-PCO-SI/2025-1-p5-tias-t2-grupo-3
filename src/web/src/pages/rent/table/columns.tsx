@@ -10,16 +10,17 @@ import {
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Rent from "..";
-import { StatusLabel } from "@/components/StatusLabel";
+import { StatusLabel, type StatusType } from "@/components/StatusLabel";
 import { useState } from "react";
 import { formatDate } from "@/utils/fomatDate";
 import ModalEditRent from "@/components/modals/ModalEditRent";
+import { statuses } from "@/utils/status";
 
 export type Rent = {
   id: number;
-  client_id: number;
-  dumpster_id: number;
-  residue_id: number;
+  client: number;
+  dumpster: number;
+  residue: number;
   rent_date: Date;
   delivery_date:Date;
   status_id:number;
@@ -45,29 +46,29 @@ export const columns: ColumnDef<Rent>[] = [
     },
   },
   {
-    accessorKey: "client_id",
+    accessorKey: "client",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Codigo do Cliente
+          Cliente
           <ArrowUpDown />
         </Button>
       )
     },
-    cell: ({ row }) => <div>{row.getValue("client_id")}</div>,
+    cell: ({ row }) => <div>{row.getValue("client")}</div>,
   },
   {
-    accessorKey: "dumpster_id",
-    header: () => <div className="text-center">Codigo de Caçamba</div>,
-    cell: ({ row }) => row.getValue("dumpster_id")
+    accessorKey: "dumpster",
+    header: () => <div className="text-center">Caçamba</div>,
+    cell: ({ row }) => row.getValue("dumpster")
   },
   {
-    accessorKey: "residue_id",
-    header: () => <div className="text-center">Codigo de Residuo</div>,
-    cell: ({ row }) => row.getValue("residue_id")
+    accessorKey: "residue",
+    header: () => <div className="text-center">Residuo</div>,
+    cell: ({ row }) => row.getValue("residue")
   },
   {
     accessorKey: "rent_date",
@@ -93,8 +94,8 @@ export const columns: ColumnDef<Rent>[] = [
       )
     },
     cell: ({ row }) => {
-      const status = row.getValue("status_id") ? "active" : "inactive"
-      return <StatusLabel status={status} />
+      const status = statuses[row.getValue("status_id") as keyof typeof statuses]
+      return <StatusLabel status={status as StatusType} />
     }
   },
   {

@@ -17,42 +17,61 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
 import { useForm, Controller } from "react-hook-form";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import api from "@/api";
 import { queryClient } from "@/lib/react-query";
-import type { IDumpsters } from "@/interfaces/IDumpsters";
 import { toast } from "sonner";
+import type { IRent } from "@/interfaces/IRent";
+import { useQuery } from "@tanstack/react-query";
+import { StatusLabel } from "../StatusLabel";
+import { ptBR } from "date-fns/locale";
+import { Input } from "../ui/input";
+import { useStatuses } from "@/hooks/useStatuses";
+import moment from "moment";
+
+const getModalData = async () => {
+  const response = await api.get("/rents/create");
+  return response.data;
+};
 
 const ModalCreateRents = () => {
-  const { handleSubmit, register, control } = useForm({
-    defaultValues: {
-      status: true,
-      identifier_number: "",
-      current_location: "",
-      created_by_user: 2,
-      updated_by_user: 2,
-    },
+  const { handleSubmit, register, control, reset } = useForm();
+  const [rentDate, setRentDate] = useState<Date>();
+  const dropdown =
+    useRef<React.ComponentProps<typeof Calendar>["captionLayout"]>("dropdown");
+  const [deliveryDate, setDeliveryDate] = useState<Date>();
+  const { data } = useQuery({
+    queryKey: ["createRent"],
+    queryFn: getModalData,
   });
+  const { statuses } = useStatuses();
   const [open, setOpen] = useState(false);
 
-  const handleSubmitForm = async (data: Partial<IDumpsters>) => {
+  const handleSubmitForm = async (data: Partial<IRent>) => {
     try {
-      const response = await api.post("/dumpsters", {
-        status: data.status == "1" ? true : false,
-        identifier_number: data.identifier_number,
-        current_location: data.current_location,
-        created_by_user: data.created_by_user,
-        updated_by_user: data.updated_by_user,
+      const formmattedRentDate = moment(data.rent_date, "DD/MM/YYYY").format("YYYY-MM-DD");
+      const formmattedDeliveryDate = moment(data.delivery_date, "DD/MM/YYYY").format("YYYY-MM-DD");
+      const response = await api.post("/rents", {
+        ...data,
+        delivery_date: formmattedDeliveryDate,
+        rent_date: formmattedRentDate,
       });
 
-      queryClient.setQueryData(["dumpsters"], (old: any[] = []) => {
+      queryClient.setQueryData(["rents"], (old: any[] = []) => {
         return [...old, response.data];
       });
-      console.log(response.data);
-      toast.success("Caçamba criada com sucesso"); 
+      reset();
+      toast.success("Caçamba criada com sucesso");
       setOpen(false);
     } catch (error) {
       toast.error("Erro ao criar a caçamba");
@@ -70,57 +89,253 @@ const ModalCreateRents = () => {
           Criar
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[1000px]">
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <DialogHeader>
-            <DialogTitle>Criar Caçamba</DialogTitle>
+            <DialogTitle>Criar Aluguel</DialogTitle>
             <DialogDescription>
               Clique em salvar quando você terminar.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 mt-3">
-            <div className="grid gap-3">
-              <Label htmlFor="identifier_number">Identificador</Label>
-              <Input
-                id="identifier_number"
-                placeholder="Digite o identificador da caçamba..."
-                required
-                {...register("identifier_number")}
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="current_location">Localização</Label>
-              <Input
-                id="current_location"
-                placeholder="Digite a localização atual da caçamba..."
-                required
-                {...register("current_location")}
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="status">Status</Label>
-              <Controller
-                name="status"
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    defaultValue={field.value == true ? "1" : "0"}
-                    onValueChange={field.onChange}
-                    required
-                  >
-                    <SelectTrigger className="w-full" id="status">
-                      <SelectValue placeholder="Selecione o Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="1">Ativo</SelectItem>
-                        <SelectItem value="0">Inativo</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-            </div>
+          <div className="flex gap-10 py-3">
+            <section className="grid gap-5 mt-3 w-full">
+              <div className="grid gap-3">
+                <Label htmlFor="client_id">Cliente</Label>
+                <Controller
+                  name="client_id"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                      required
+                    >
+                      <SelectTrigger className="w-full" id="client_id">
+                        <SelectValue placeholder="Selecione o cliente" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {data?.clients.map((client: any) => (
+                            <SelectItem
+                              key={String(client.id)}
+                              value={String(client.id)}
+                            >
+                              {client.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="dumpster_id">Caçamba</Label>
+                <Controller
+                  name="dumpster_id"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                      required
+                    >
+                      <SelectTrigger className="w-full" id="dumpster_id">
+                        <SelectValue placeholder="Selecione a caçamba" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {data?.dumpsters.map((dumpster: any) => (
+                            <SelectItem
+                              key={String(dumpster.id)}
+                              value={String(dumpster.id)}
+                            >
+                              {dumpster.identifier_number}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="residue_id">Resíduo</Label>
+                <Controller
+                  name="residue_id"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                      required
+                    >
+                      <SelectTrigger className="w-full" id="residue_id">
+                        <SelectValue placeholder="Selecione o resíduo" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {data?.residues.map((residue: any) => (
+                            <SelectItem
+                              key={String(residue.id)}
+                              value={String(residue.id)}
+                            >
+                              {residue.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="rent_date">Data de locação</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      data-empty={!rentDate}
+                      className="data-[empty=true]:text-muted-foreground w-full justify-start text-left font-normal"
+                    >
+                      <CalendarIcon />
+                      {rentDate ? (
+                        format(rentDate, "PPP")
+                      ) : (
+                        <span>Selecione uma data</span>
+                      )}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0">
+                    <Controller
+                      name="rent_date"
+                      control={control}
+                      render={({ field }) => (
+                        <Calendar
+                          mode="single"
+                          defaultMonth={rentDate}
+                          selected={field.value ?? rentDate}
+                          onSelect={(date) => {
+                            setRentDate(date);
+                            field.onChange(date ? format(date, 'dd/MM/yyyy') : '');
+                          }}
+                          captionLayout={dropdown.current}
+                          className="rounded-lg border shadow-sm"
+                          locale={ptBR}
+                        />
+                      )}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="delivery_date">Data de entrega</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      data-empty={!deliveryDate}
+                      className="data-[empty=true]:text-muted-foreground w-full justify-start text-left font-normal"
+                    >
+                      <CalendarIcon />
+                      {deliveryDate ? (
+                        format(deliveryDate, "PPP")
+                      ) : (
+                        <span>Selecione uma data</span>
+                      )}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0">
+                    <Controller
+                      name="delivery_date"
+                      control={control}
+                      render={({ field }) => (
+                        <Calendar
+                          mode="single"
+                          defaultMonth={deliveryDate}
+                          selected={field.value || deliveryDate}
+                          onSelect={(date) => {
+                            setDeliveryDate(date);
+                            field.onChange(date ? format(date, 'dd/MM/yyyy') : '');
+                          }}
+                          captionLayout={dropdown.current}
+                          className="rounded-lg border shadow-sm"
+                          locale={ptBR}
+                        />
+                      )}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="status_id">Status</Label>
+                <Controller
+                  name="status_id"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                      required
+                    >
+                      <SelectTrigger className="w-full" id="status_id">
+                        <SelectValue placeholder="Selecione o status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {statuses.map((status: any) => (
+                            <SelectItem
+                              key={String(status.id)}
+                              value={String(status.id)}
+                            >
+                              <StatusLabel status={status.code} />
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+            </section>
+            <div className="w-px bg-gray-300 self-stretch mt-10"></div>
+            <section className="grid gap-2 mt-3 w-full">
+              <div className="grid gap-3">
+                <Label htmlFor="client_id">Motorista</Label>
+                <Input
+                  placeholder="Digite o nome do motorista"
+                  {...register("driver_name")}
+                />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="operation_type">Tipo da operação</Label>
+                <Input
+                  placeholder="Digite o tipo da operação"
+                  {...register("operation_type")}
+                />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="location">Localização</Label>
+                <Input
+                  placeholder="Digite o endereço do local de retirada"
+                  {...register("location")}
+                />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="location">Destino</Label>
+                <Input
+                  placeholder="Digite o endereço de destino"
+                  {...register("destination")}
+                />
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="comments">Comentários</Label>
+                <Input
+                  placeholder="Digite algum comentário sobre o aluguel..."
+                  {...register("comments")}
+                />
+              </div>
+            </section>
           </div>
           <DialogFooter className="mt-4">
             <DialogClose asChild>

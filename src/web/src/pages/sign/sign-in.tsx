@@ -1,10 +1,9 @@
 import { useState, type FormEvent } from 'react';
 import { Input } from '@/components/ui/input'; 
 import { Eye, EyeOff, Loader } from 'lucide-react'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router';
 import { toast } from 'sonner';
 import api from '@/api';
-import { Link } from 'react-router-dom';
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
@@ -115,7 +114,7 @@ const SignIn = () => {
             type="submit"
             className="text-white p-3 rounded-md border-0"
             disabled={loading}
-            style={{ backgroundColor: "#F43806" }}
+            style={{ backgroundColor: "#bdf406" }}
           >
             {
               loading ? (

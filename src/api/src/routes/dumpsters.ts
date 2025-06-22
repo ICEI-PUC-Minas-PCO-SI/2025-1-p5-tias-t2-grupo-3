@@ -14,12 +14,10 @@ export const dumpsterRoutes = async (app: FastifyInstance) => {
   app.post("/", async (request, reply) => {
     try {
       const data = request.body as dumpsters;
-      console.log(request.body, " request.body");
 
       const dumpster = await db.dumpsters.create({ data });
       reply.send(dumpster);
     } catch (error) {
-      console.error(error);
       reply.status(500).send(error);
     }
   });
