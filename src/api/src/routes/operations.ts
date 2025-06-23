@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { db } from '../../db'
+import { db } from '../db'
 import { operations } from '../generated/prisma'
 import moment from 'moment'
 

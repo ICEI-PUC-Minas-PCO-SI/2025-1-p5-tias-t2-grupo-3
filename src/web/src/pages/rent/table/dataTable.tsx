@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { AdminCSVExportButton } from "@/components/AdminCSVExportButton"
 import type { IDataTable } from "@/interfaces/IDataTable"
 
 export type Payment = {
@@ -78,38 +79,45 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Colunas <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {(column.id === "id" && "Código") ||
-                      (column.id === "client_id" && "Código do Cliente") ||
-                      (column.id === "dumpster_id" && "Código da Caçamba") ||
-                       (column.id === "residue_id" && "Código do Residuo") ||
-                        (column.id === "rent_date" && "Data do Aluguel") ||
-                         (column.id === "delivery_date" && "Data da Entrega") ||
-                      (column.id === "status" && "Status")}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="ml-auto flex gap-2">
+          <AdminCSVExportButton
+            data={table.getFilteredRowModel().rows.map(row => row.original)}
+            columns={columns}
+            filename="alugueis"
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+                Colunas <ChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {(column.id === "id" && "Código") ||
+                        (column.id === "client_id" && "Código do Cliente") ||
+                        (column.id === "dumpster_id" && "Código da Caçamba") ||
+                         (column.id === "residue_id" && "Código do Residuo") ||
+                          (column.id === "rent_date" && "Data do Aluguel") ||
+                           (column.id === "delivery_date" && "Data da Entrega") ||
+                        (column.id === "status" && "Status")}
+                    </DropdownMenuCheckboxItem>
+                  )
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>

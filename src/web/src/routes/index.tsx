@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router";
 import { Layout } from "@/components";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Home from "@/pages/Home";
 import Dumpsters from "@/pages/dumpsters";
 import Residues from "@/pages/Residues";
@@ -24,41 +25,51 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: (
-      <Layout>
-        <Home />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <Home />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/dumpsters",
     element: (
-      <Layout>
-        <Dumpsters />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <Dumpsters />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/operations",
     element: (
-      <Layout>
-        <Operations />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <Operations />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/rent",
     element: (
-      <Layout>
-        <Rent />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <Rent />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/residues",
     element: (
-      <Layout>
-        <Residues />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <Residues />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
 ]);

@@ -1,5 +1,7 @@
 import { BadgeDollarSign, Recycle, Truck, MonitorCog, CircleUserRound, LogOut  } from "lucide-react";
 import logo from "@/assets/sidebarLogo.png";
+import { logoutWithRedirect, getCurrentUser, type User } from "@/utils/auth";
+import { toast } from "sonner";
 
 import {
   Sidebar,
@@ -43,6 +45,18 @@ const items = [
 ];
 
 const AppSidebar = () => {
+  const currentUser: User | null = getCurrentUser();
+  const username = currentUser?.username || "Usuário";
+  const userLevel = currentUser?.level || "user";
+
+  const handleLogout = () => {
+    // Show confirmation toast
+    toast.success('Logout realizado com sucesso!');
+    
+    // Perform logout with redirect
+    logoutWithRedirect();
+  };
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -71,9 +85,18 @@ const AppSidebar = () => {
         <div className="flex justify-between items-center p-2">
             <div className="flex items-center gap-2">
                 <CircleUserRound className="size-5" />
-                <span className="text-sm font-semibold">Usuário</span>
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold">{username}</span>
+                  {userLevel === 'admin' && (
+                    <span className="text-xs text-gray-500 capitalize">Admin</span>
+                  )}
+                </div>
             </div>
-            <LogOut className="size-4 cursor-pointer hover:text-gray-500"/>
+            <LogOut 
+              className="size-4 cursor-pointer hover:text-gray-500 transition-colors"
+              onClick={handleLogout}
+              title="Sair"
+            />
         </div>
       </SidebarFooter>
     </Sidebar>

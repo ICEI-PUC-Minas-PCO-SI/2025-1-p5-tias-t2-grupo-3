@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { AdminCSVExportButton } from "@/components/AdminCSVExportButton"
 import type { IDataTable } from "@/interfaces/IDataTable"
 
 export type Payment = {
@@ -78,9 +79,15 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
+        <div className="ml-auto flex gap-2">
+          <AdminCSVExportButton
+            data={table.getFilteredRowModel().rows.map(row => row.original)}
+            columns={columns}
+            filename="operacoes"
+          />
+          <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline">
               Colunas <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
@@ -112,6 +119,7 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>

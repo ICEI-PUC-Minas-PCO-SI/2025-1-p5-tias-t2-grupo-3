@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { db } from '../../db';
+import { db } from '../db';
 import { users } from '../generated/prisma';
 import * as bcrypt from 'bcrypt';
 
