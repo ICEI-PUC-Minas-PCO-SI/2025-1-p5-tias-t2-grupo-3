@@ -78,12 +78,12 @@ Atualizado em: 21/04/2024
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Gabriel        | Introdução | 01/02/2024     | 07/02/2024 | ✔️    | 05/02/2024      |
-| Arthur        | Objetivos    | 03/02/2024     | 10/02/2024 | ✔️    |   ✔️              |
-| Catarina        | Histórias de usuário  | 01/01/2024     | 07/01/2005 | ✔️     |                 |
-| Matheus        | Personas 1  |    01/01/2024        | 12/02/2005 | ✔️    |       |
-| Raul        | Documenta~çao |    01/01/2024        | 12/02/2005 |✔️    |       |
-| Guilherme        | Personas 1  |    01/01/2024        | 12/02/2005 | ✔️    |       |
+| Gabriel        | Introdução | 01/02/2025     | 07/02/2024 | ✔️    | 09/03/2025      |
+| Arthur        | Objetivos    | 03/02/2025     | 10/02/2024 | ✔️    |   12/03/2025               |
+| Catarina        | Histórias de usuário  | 01/01/2025     | 07/01/2025 | ✔️     |    13/03/2025              |
+| Matheus        | Personas 1  |    01/01/2025        | 12/02/2025 | ✔️    |   05/03/2025     |
+| Raul        | Documenta~çao |    01/01/2025        | 12/02/2025 |✔️    |  05/03/2025      |
+| Guilherme        | Personas 1  |    01/01/2025        | 12/02/2025 | ✔️    |    05/03/2025    |
 
 #### Sprint 2
 
@@ -91,7 +91,7 @@ Atualizado em: 21/04/2024
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Gabriel        | Página inicial   | 01/02/2025     | 07/03/2025 | ✔️    19/03/2025      |
+| Gabriel        | Página inicial   | 01/02/2025     | 07/03/2025 | ✔️  |  19/03/2025      |
 | Arthur       | CSS unificado    | 03/02/2025     | 10/03/2025 | ✔️   |      19/03/2025           |
 | Raul        | Página de login  | 01/02/2025    | 07/03/2025 | ✔️     |      19/03/2025           |
 | Guilherme        | Script de login  |  01/01/2025    | 12/03/2024 | ✔️    |   17/03/2025    |
