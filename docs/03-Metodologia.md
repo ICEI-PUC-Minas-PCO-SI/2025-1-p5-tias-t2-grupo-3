@@ -3,7 +3,13 @@
 
 <span style="color:red">Pré-requisitos: <a href="02-Especificacao.md"> Especificação do projeto</a></span>
 
-Descreva aqui a metodologia de trabalho do grupo para abordar o problema. Inclua definições sobre os ambientes de trabalho utilizados pela equipe para desenvolver o projeto. Isso abrange a relação dos ambientes utilizados, a estrutura para a gestão do código-fonte, além da definição do processo e das ferramentas por meio dos quais a equipe se organiza (gestão de equipes).
+A equipe adotou uma metodologia de trabalho colaborativa baseada em reuniões semanais nas aulas para planejamento e revisão das tarefas. Inicialmente, o problema foi discutido em grupo e dividido em partes menores, atribuídas a diferentes membros da equipe de acordo com suas habilidades.
+
+Para o desenvolvimento, utilizamos o GitHub como ambiente principal para controle de versão e centralização do código-fonte. A estrutura do repositório foi organizada com uma branch principal (main) e branches auxiliares para o desenvolvimento de funcionalidades específicas. Os commits seguiram uma padronização de mensagens para facilitar o entendimento do histórico de alterações.
+
+Como ambientes de desenvolvimento, utilizamos o Visual Studio Code. A comunicação da equipe foi feita principalmente via WhatsApp e Discord, e a organização das tarefas foi realizada em um consenso dos membros do grupo, onde registramos o progresso e as pendências.
+
+Esse conjunto de ferramentas e processos possibilitou uma boa organização da equipe e um acompanhamento contínuo da evolução do projeto.
 
 
 ## Controle de versão
