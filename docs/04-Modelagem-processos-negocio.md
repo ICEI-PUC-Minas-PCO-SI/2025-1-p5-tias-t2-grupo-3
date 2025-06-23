@@ -35,6 +35,8 @@ Use o seguinte modelo:
 | Percentual de reclamações | Avaliar quantitativamente as reclamações | Percentual de reclamações em relação ao total de atendimentos | Tabela Reclamações | número total de reclamações / número total de atendimentos |
 | Taxa de requisições atendidas | Melhorar a prestação de serviços medindo a porcentagem de requisições atendidas| Mede a % de requisições atendidas na semana | Tabela Solicitações | (número de requisições atendidas / número total de requisições) * 100 |
 | Taxa de entrega de material | Manter controle sobre os materiais que estão sendo entregues | Mede % de material entregue dentro do mês | Tabela Pedidos | (número de pedidos entregues / número total de pedidos) * 100 |
+| Média de tempo de atendimento | Reduzir o tempo médio de atendimento ao usuário | Tempo médio gasto do início ao fim de cada atendimento | Tabela Solicitacoes | soma do tempo de atendimento / número total de atendimentos |
+| Taxa de usuários ativos | Avaliar o engajamento dos usuários no sistema | Percentual de usuários que acessaram o sistema no mês | Tabela Usuarios | (número de usuários ativos / número total de usuários) * 100 |
 
 
-Obs.: todas as informações necessárias para gerar os indicadores devem estar no diagrama de classe a ser apresentado posteriormente.
+
