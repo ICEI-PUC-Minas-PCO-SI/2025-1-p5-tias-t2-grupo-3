@@ -1,13 +1,13 @@
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router";
 import { Layout } from "@/components";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import Home from "@/pages/Home";
 import Dumpsters from "@/pages/dumpsters";
-import Residues from "@/pages/Residues";
+import Residues from "@/pages/residues";
 import Operations from "@/pages/operations";
 import Rent from "@/pages/rent";
 import SignIn from "@/pages/sign/sign-in";
 import SignUp from "@/pages/sign/sign-up";
+import Clients from "@/pages/clients";
 
 const router = createBrowserRouter([
   {
@@ -21,16 +21,6 @@ const router = createBrowserRouter([
   {
     path: "/sign-up",
     element: <SignUp />,
-  },
-  {
-    path: "/home",
-    element: (
-      <ProtectedRoute>
-        <Layout>
-          <Home />
-        </Layout>
-      </ProtectedRoute>
-    ),
   },
   {
     path: "/dumpsters",
@@ -50,6 +40,14 @@ const router = createBrowserRouter([
           <Operations />
         </Layout>
       </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/clients",
+    element: (
+      <Layout>
+        <Clients />
+      </Layout>
     ),
   },
   {

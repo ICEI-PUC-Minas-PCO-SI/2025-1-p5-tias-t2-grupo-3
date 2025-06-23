@@ -12,8 +12,8 @@ export const createRentService = async (data: any) => {
           status_id: Number(data.status_id),
           rent_date: moment(data.rent_date).toDate(),
           delivery_date: moment(data.delivery_date).toDate(),
-          created_by_user: 1,
-          updated_by_user: 1,
+          created_by_user: data.created_by_user,
+          updated_by_user: data.updated_by_user,
         },
       });
 
@@ -27,8 +27,8 @@ export const createRentService = async (data: any) => {
           destination: data.destination,
           comments: data.comments,
           status_id: Number(data.status_id),
-          created_by_user: 1,
-          updated_by_user: 1,
+          created_by_user: data.created_by_user,
+          updated_by_user: data.updated_by_user,
         },
       });
 

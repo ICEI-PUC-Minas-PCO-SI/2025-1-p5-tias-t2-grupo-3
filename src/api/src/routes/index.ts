@@ -4,12 +4,14 @@ import { rentRoutes } from "./rent";
 import { residueRoutes } from "./residues";
 import { statusRoutes } from "./statuses";
 import { userRoutes } from "./users";
+import { clientRoutes } from "./clients";
 
-export default {
+export {
   dumpsterRoutes,
   userRoutes,
   residueRoutes,
   operationRoutes,
   rentRoutes,
-  statusRoutes
+  statusRoutes,
+  clientRoutes
 };

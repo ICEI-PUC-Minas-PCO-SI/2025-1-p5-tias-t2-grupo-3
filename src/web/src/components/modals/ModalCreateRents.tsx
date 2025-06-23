@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
 import { useForm, Controller } from "react-hook-form";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import api from "@/api";
 import { queryClient } from "@/lib/react-query";
 import { toast } from "sonner";
@@ -37,7 +37,11 @@ import { StatusLabel } from "../StatusLabel";
 import { ptBR } from "date-fns/locale";
 import { Input } from "../ui/input";
 import { useStatuses } from "@/hooks/useStatuses";
+import { useAuth } from "@/hooks/useAuth";
 import moment from "moment";
+import type { IClients } from "@/interfaces/IClients";
+import type { IResidues } from "@/interfaces/IResidues";
+import type { IDumpsters } from "@/interfaces/IDumpsters";
 
 const getModalData = async () => {
   const response = await api.get("/rents/create");
@@ -45,7 +49,9 @@ const getModalData = async () => {
 };
 
 const ModalCreateRents = () => {
-  const { handleSubmit, register, control, reset } = useForm();
+  const { user } = useAuth();
+  const { handleSubmit, register, control, reset, getValues, watch, setValue } =
+    useForm();
   const [rentDate, setRentDate] = useState<Date>();
   const dropdown =
     useRef<React.ComponentProps<typeof Calendar>["captionLayout"]>("dropdown");
@@ -59,24 +65,56 @@ const ModalCreateRents = () => {
 
   const handleSubmitForm = async (data: Partial<IRent>) => {
     try {
-      const formmattedRentDate = moment(data.rent_date, "DD/MM/YYYY").format("YYYY-MM-DD");
-      const formmattedDeliveryDate = moment(data.delivery_date, "DD/MM/YYYY").format("YYYY-MM-DD");
+      const formmattedRentDate = moment(data?.rent_date, "DD/MM/YYYY").format(
+        "YYYY-MM-DD"
+      );
+      const formmattedDeliveryDate = moment(
+        data?.delivery_date,
+        "DD/MM/YYYY"
+      ).format("YYYY-MM-DD");
       const response = await api.post("/rents", {
         ...data,
         delivery_date: formmattedDeliveryDate,
         rent_date: formmattedRentDate,
+        created_by_user: user?.id,
+        updated_by_user: user?.id,
       });
 
       queryClient.setQueryData(["rents"], (old: any[] = []) => {
-        return [...old, response.data];
+        return [...old, { ...data, ...response.data}];
       });
+
       reset();
+      setRentDate(undefined);
+      setDeliveryDate(undefined);
       toast.success("Caçamba criada com sucesso");
       setOpen(false);
     } catch (error) {
+      console.error(error, 'Erro ao criar o aluguel');
       toast.error("Erro ao criar a caçamba");
     }
   };
+
+  useMemo(() => {
+    const client = data?.clients?.find(
+      (client: IClients) => client.id === Number(getValues("client_id"))
+    );
+    setValue("client", client?.name);
+  }, [watch("client_id")]);
+
+  useMemo(() => {
+    const dumpster = data?.dumpsters?.find(
+      (dumpster: IDumpsters) => dumpster.id === Number(getValues("dumpster_id"))
+    );
+    setValue("dumpster", dumpster?.identifier_number);
+  }, [watch("dumpster_id")]);
+
+  useMemo(() => {
+    const residue = data?.residues?.find(
+      (residue: IResidues) => residue.id === Number(getValues("residue_id"))
+    );
+    setValue("residue", residue?.name);
+  }, [watch("residue_id")]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -97,7 +135,7 @@ const ModalCreateRents = () => {
               Clique em salvar quando você terminar.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex gap-10 py-3">
+          <div className="flex flex-col lg:flex-row gap-10 py-3">
             <section className="grid gap-5 mt-3 w-full">
               <div className="grid gap-3">
                 <Label htmlFor="client_id">Cliente</Label>
@@ -217,11 +255,14 @@ const ModalCreateRents = () => {
                           selected={field.value ?? rentDate}
                           onSelect={(date) => {
                             setRentDate(date);
-                            field.onChange(date ? format(date, 'dd/MM/yyyy') : '');
+                            field.onChange(
+                              date ? format(date, "dd/MM/yyyy") : ""
+                            );
                           }}
                           captionLayout={dropdown.current}
                           className="rounded-lg border shadow-sm"
                           locale={ptBR}
+                          required
                         />
                       )}
                     />
@@ -256,11 +297,14 @@ const ModalCreateRents = () => {
                           selected={field.value || deliveryDate}
                           onSelect={(date) => {
                             setDeliveryDate(date);
-                            field.onChange(date ? format(date, 'dd/MM/yyyy') : '');
+                            field.onChange(
+                              date ? format(date, "dd/MM/yyyy") : ""
+                            );
                           }}
                           captionLayout={dropdown.current}
                           className="rounded-lg border shadow-sm"
                           locale={ptBR}
+                          required
                         />
                       )}
                     />
@@ -283,7 +327,7 @@ const ModalCreateRents = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          {statuses.map((status: any) => (
+                          {statuses?.map((status: any) => (
                             <SelectItem
                               key={String(status.id)}
                               value={String(status.id)}
@@ -298,8 +342,8 @@ const ModalCreateRents = () => {
                 />
               </div>
             </section>
-            <div className="w-px bg-gray-300 self-stretch mt-10"></div>
-            <section className="grid gap-2 mt-3 w-full">
+            <div className="w-px bg-gray-300 self-stretch mt-10 hidden xl:block"></div>
+            <section className="grid gap-5 mt-3 w-full">
               <div className="grid gap-3">
                 <Label htmlFor="client_id">Motorista</Label>
                 <Input
@@ -336,6 +380,9 @@ const ModalCreateRents = () => {
                 />
               </div>
             </section>
+              <Input {...register("client")} type="hidden" />
+              <Input {...register("dumpster")} type="hidden" />
+              <Input {...register("residue")} type="hidden" />
           </div>
           <DialogFooter className="mt-4">
             <DialogClose asChild>

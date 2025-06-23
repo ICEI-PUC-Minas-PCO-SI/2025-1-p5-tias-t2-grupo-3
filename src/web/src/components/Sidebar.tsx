@@ -1,7 +1,6 @@
-import { BadgeDollarSign, Recycle, Truck, MonitorCog, CircleUserRound, LogOut  } from "lucide-react";
+import { CircleUserRound, LogOut  } from "lucide-react";
 import logo from "@/assets/sidebarLogo.png";
-import { logoutWithRedirect, getCurrentUser, type User } from "@/utils/auth";
-import { toast } from "sonner";
+import { getCurrentUser, type User } from "@/utils/auth";
 
 import {
   Sidebar,
@@ -15,47 +14,13 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-
-const items = [
-  // {
-  //   title: "Home",
-  //   url: "/",
-  //   icon: Home,
-  // },
-  {
-    title: "Alugueis",
-    url: "/rent",
-    icon: BadgeDollarSign,
-  },
-  {
-    title: "Caçambas",
-    url: "/dumpsters",
-    icon: Truck,
-  },
-  {
-    title: "Residuos",
-    url: "/residues",
-    icon: Recycle,
-  },
-  {
-    title: "Operações",
-    url: "/operations",
-    icon: MonitorCog,
-  }
-];
+import { handleLogout } from "@/utils/handleLogOut";
+import { items } from "@/data/pages";
 
 const AppSidebar = () => {
   const currentUser: User | null = getCurrentUser();
   const username = currentUser?.username || "Usuário";
   const userLevel = currentUser?.level || "user";
-
-  const handleLogout = () => {
-    // Show confirmation toast
-    toast.success('Logout realizado com sucesso!');
-    
-    // Perform logout with redirect
-    logoutWithRedirect();
-  };
 
   return (
     <Sidebar>
@@ -95,7 +60,6 @@ const AppSidebar = () => {
             <LogOut 
               className="size-4 cursor-pointer hover:text-gray-500 transition-colors"
               onClick={handleLogout}
-              title="Sair"
             />
         </div>
       </SidebarFooter>

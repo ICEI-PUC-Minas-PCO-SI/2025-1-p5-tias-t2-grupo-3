@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -9,16 +9,16 @@ import {
   type ColumnFiltersState,
   type SortingState,
   type VisibilityState,
-} from "@tanstack/react-table"
-import { ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
+} from "@tanstack/react-table";
+import { ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -31,23 +31,23 @@ import { AdminCSVExportButton } from "@/components/AdminCSVExportButton"
 import type { IDataTable } from "@/interfaces/IDataTable"
 
 export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
+  id: string;
+  amount: number;
+  status: "pending" | "processing" | "success" | "failed";
+  email: string;
+};
 
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: IDataTable<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  )
+  );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -66,16 +66,16 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filtrar pelo Código do Aluguel..."
-          value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
+          placeholder="Filtrar pelo cliente..."
+          value={(table.getColumn("client")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("id")?.setFilterValue(event.target.value)
+            table.getColumn("client")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -106,12 +106,12 @@ export function DataTable<TData, TValue>({
                       }
                     >
                       {(column.id === "id" && "Código") ||
-                        (column.id === "client_id" && "Código do Cliente") ||
-                        (column.id === "dumpster_id" && "Código da Caçamba") ||
-                         (column.id === "residue_id" && "Código do Residuo") ||
+                        (column.id === "client" && "Código do Cliente") ||
+                        (column.id === "dumpster" && "Código da Caçamba") ||
+                         (column.id === "residue" && "Código do Residuo") ||
                           (column.id === "rent_date" && "Data do Aluguel") ||
                            (column.id === "delivery_date" && "Data da Entrega") ||
-                        (column.id === "status" && "Status")}
+                        (column.id === "status_id" && "Status")}
                     </DropdownMenuCheckboxItem>
                   )
                 })}
@@ -134,7 +134,7 @@ export function DataTable<TData, TValue>({
                             header.getContext()
                           )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -170,10 +170,6 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} de{" "}
-          {table.getFilteredRowModel().rows.length} linha(s) selecionadas.
-        </div>
         <div className="space-x-2">
           <Button
             variant="outline"
@@ -194,5 +190,5 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
     </div>
-  )
+  );
 }

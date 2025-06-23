@@ -45,7 +45,7 @@ const SignIn = () => {
       localStorage.setItem('user', JSON.stringify(response.data));
       
       toast.success('Login realizado com sucesso!');
-      navigate('/home'); // Redirect to home page after successful login
+      navigate('/rent'); // Redirect to home page after successful login
     } catch (error: any) {
       if (error.response) {
         if (error.response.status === 404) {
@@ -73,48 +73,48 @@ const SignIn = () => {
           className="lg:max-w-md mt-20 md:mt-32 lg:mt-0 justify-center h-full mx-auto w-full flex flex-col gap-7"
         >
           <h3 className="text-4xl font-semibold text-center hidden lg:block">
-            Entrar <span className="text-red-600">com</span>
+            Entrar <span className="text-green-600">com</span>
           </h3>
           <div className="flex justify-center lg:hidden">
             <img src="/src/assets/logo.png" className="w-72" alt="Logo" />
           </div>
           <div className="flex flex-col gap-2 text-sm text-gray-600 relative">
-            <label htmlFor="username">Usuário <span className="text-red-500">*</span></label>
+            <label htmlFor="username">Usuário <span className="text-green-500">*</span></label>
             <Input
               id="username"
               placeholder="Digite seu nome de usuário"
               onChange={(e) => setUsername(e.target.value)}
-              className={`${usernameError ? "border-red-600" : ""}`}
+              className={`${usernameError ? "border-green-600" : ""}`}
               type="text"
               required
             />
           </div>
           <div className="flex flex-col gap-2 text-sm text-gray-600 relative">
-            <label htmlFor="password">Senha <span className="text-red-500">*</span></label>
+            <label htmlFor="password">Senha <span className="text-green-500">*</span></label>
             <Input
               id="password"
               placeholder="Digite sua senha"
               onChange={(e) => setPassword(e.target.value)}
-              className={`${passwordError ? "border-red-600" : ""}`}
+              className={`${passwordError ? "border-green-600" : ""}`}
               type={showPassword ? "text" : "password"}
               required
             />
             <Eye
               fontSize={18} 
               onClick={() => setShowPassword(false)} 
-              className={`${showPassword ? "block" : "hidden"} absolute right-3 top-10 cursor-pointer`} 
+              className={`${showPassword ? "block" : "hidden"} absolute right-3 top-9 cursor-pointer`} 
             />
             <EyeOff 
               onClick={() => setShowPassword(true)} 
               fontSize={18} 
-              className={`${showPassword ? "hidden" : "block"} absolute right-3 top-10 cursor-pointer`} 
+              className={`${showPassword ? "hidden" : "block"} absolute right-3 top-9 cursor-pointer`} 
             />
           </div>
           <button
             type="submit"
             className="text-white p-3 rounded-md border-0"
             disabled={loading}
-            style={{ backgroundColor: "#bdf406" }}
+            style={{ backgroundColor: "#10bd19" }}
           >
             {
               loading ? (
@@ -126,15 +126,15 @@ const SignIn = () => {
           </button>
           
           <p className="text-center text-sm text-gray-600">
-            Não tem uma conta? <Link to="/sign-up" className="text-red-600 hover:underline">Cadastre-se</Link>
+            Não tem uma conta? <Link to="/sign-up" className="text-green-600 hover:underline">Cadastre-se</Link>
           </p>
         </form>
       </section>
       <section className="relative hidden lg:block w-full">
-        <img src="/src/assets/logo.jpg" className="h-svh object-cover" style={{ filter: "blur(3px)" }} alt="Wallpaper" />
+        <div className="h-svh object-cover" style={{ filter: "blur(3px)" }} />
         <div
           className="absolute inset-0 flex justify-center items-center"
-          style={{ backgroundColor: "rgba(233, 54, 0, 0.493)" }}
+          style={{ backgroundColor: "rgba(0, 233, 54, 0.493)" }}
         >
           <img src="/src/assets/logo.png" style={{ width: "320px" }} alt="Logo" />
         </div>

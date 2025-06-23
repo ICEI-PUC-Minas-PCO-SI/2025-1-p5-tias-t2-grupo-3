@@ -20,7 +20,7 @@ export function CSVExportButton<TData>({
   columns,
   filename = 'export',
   variant = 'outline',
-  size = 'sm',
+  // size = 'sm',
   className = ''
 }: CSVExportButtonProps<TData>) {
   const { isExporting, exportData } = useCSVExport({
@@ -32,7 +32,7 @@ export function CSVExportButton<TData>({
   return (
     <Button
       variant={variant}
-      size={size}
+      // size={size}
       onClick={exportData}
       disabled={isExporting || !data || data.length === 0}
       className={className}

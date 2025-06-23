@@ -1,8 +1,8 @@
 export interface IRent {
   id: number;
-  client_id: number;
-  dumpster_id: number;
-  residue_id: number;
+  client: number;
+  dumpster: number;
+  residue: number;
   rent_date: Date;
   delivery_date: Date;
   status_id: number;

@@ -22,6 +22,7 @@ import { Label } from "@/components/ui/label";
 import { useForm, Controller } from "react-hook-form";
 import { queryClient } from "@/lib/react-query";
 import type { IResidues } from "@/interfaces/IResidues";
+import { useAuth } from "@/hooks/useAuth";
 
 const ModalEditResidues = ({
   open,
@@ -32,12 +33,12 @@ const ModalEditResidues = ({
   data: Partial<IResidues>;
   setOpen: (open: boolean) => void;
 }) => {
+  const { user } = useAuth();
   const { handleSubmit, register, control } = useForm({
     defaultValues: {
       status: residue.status,
       name: residue.name,
       created_by_user: residue.created_by_user,
-      updated_by_user: residue.updated_by_user,
     }
   });
 
@@ -47,7 +48,7 @@ const ModalEditResidues = ({
         status: data.status == "1" ? true : false,
         name: data.name,
         created_by_user: data.created_by_user,
-        updated_by_user: data.updated_by_user,
+        updated_by_user: user?.id,
       });
       queryClient.setQueryData(["residues"], (old: any[] = []) => {
         return old.map((item) => {

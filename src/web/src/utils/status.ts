@@ -1,9 +1,9 @@
 export const statuses = {
-  true: 'active',
-  false: 'inactive',
-  1: 'active',
-  2: 'inactive',
-  3: 'pending',
+  1: 'pending',
+  2: 'active',
+  3: 'inactive',
   4: 'completed',
-  5: 'canceled'
+  5: 'canceled',
+  true: 'active',
+  false: 'inactive'
 }

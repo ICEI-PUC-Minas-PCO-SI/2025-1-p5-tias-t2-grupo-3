@@ -31,6 +31,7 @@ import { format } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import { ptBR } from "date-fns/locale";
 import { useRef, useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 const ModalEditOperations = ({
   open,
@@ -41,6 +42,7 @@ const ModalEditOperations = ({
   data: Partial<IOperation>;
   setOpen: (open: boolean) => void;
 }) => {
+  const { user } = useAuth();
   const { statuses } = useStatuses();
   const [deliveryDate, setDeliveryDate] = useState<Date | undefined>(operation.date || undefined);
   const dropdown = useRef<React.ComponentProps<typeof Calendar>["captionLayout"]>("dropdown");
@@ -62,7 +64,7 @@ const ModalEditOperations = ({
     
     try {
       const response = await api.put(`/operations/${operation.id}`, {
-        status_id: data.status_id,
+        status_id: Number(data?.status_id || operation.status_id),
         date: formattedDate.includes("Invalid date") ? operation.date : formattedDate,
         rent_id: operation.rent_id,
         driver_name: operation.driver_name,
@@ -70,6 +72,7 @@ const ModalEditOperations = ({
         location: data.location,
         destination: data.destination,
         comments: data.comments,
+        updated_by_user: user?.id,
       });
       queryClient.setQueryData(["operations"], (old: any[] = []) => {
         return old.map((item) => {

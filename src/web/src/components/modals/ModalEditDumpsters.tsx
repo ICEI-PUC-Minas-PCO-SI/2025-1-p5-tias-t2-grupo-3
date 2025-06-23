@@ -22,6 +22,7 @@ import { Label } from "@/components/ui/label";
 import { useForm, Controller } from "react-hook-form";
 import { queryClient } from "@/lib/react-query";
 import type { IDumpsters } from "@/interfaces/IDumpsters";
+import { useAuth } from "@/hooks/useAuth";
 
 const ModalEditDumpsters = ({
   open,
@@ -32,13 +33,13 @@ const ModalEditDumpsters = ({
   data: IDumpsters;
   setOpen: (open: boolean) => void;
 }) => {
+  const { user } = useAuth();
   const { handleSubmit, register, control } = useForm({
     defaultValues: {
       status: dumpster.status,
       identifier_number: dumpster.identifier_number,
       current_location: dumpster.current_location,
       created_by_user: dumpster.created_by_user,
-      updated_by_user: dumpster.updated_by_user,
     }
   });
 
@@ -49,7 +50,7 @@ const ModalEditDumpsters = ({
         identifier_number: data.identifier_number,
         current_location: data.current_location,
         created_by_user: data.created_by_user,
-        updated_by_user: data.updated_by_user,
+        updated_by_user: user?.id,
       });
       queryClient.setQueryData(["dumpsters"], (old: any[] = []) => {
         return old.map((item) => {

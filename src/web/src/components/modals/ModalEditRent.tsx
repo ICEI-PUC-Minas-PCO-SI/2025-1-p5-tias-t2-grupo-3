@@ -34,6 +34,7 @@ import {
 import { ptBR } from "date-fns/locale";
 import { useRef, useState } from "react";
 import moment from "moment";
+import { useAuth } from "@/hooks/useAuth";
 
 const getStatuses = async () => {
   try {
@@ -53,6 +54,7 @@ const ModalEditRent = ({
   data: Partial<IRent>;
   setOpen: (open: boolean) => void;
 }) => {
+  const { user } = useAuth();
   const [deliveryDate, setDeliveryDate] = useState<Date | undefined>(rent.delivery_date || undefined);
   const dropdown = useRef<React.ComponentProps<typeof Calendar>["captionLayout"]>("dropdown");
   const { handleSubmit, control, reset } = useForm({
@@ -72,6 +74,7 @@ const ModalEditRent = ({
       const response = await api.put(`/rents/${rent.id}`, {
         status_id: data.status_id,
         delivery_date: formattedDeliveryDate.includes("Invalid date") ? rent.delivery_date : formattedDeliveryDate,
+        updated_by_user: user?.id,
       });
 
       queryClient.setQueryData(["rents"], (old: any[] = []) => {
@@ -152,6 +155,7 @@ const ModalEditRent = ({
                 render={({ field }) => (
                   <Select
                     defaultValue={String(field.value)}
+                    value={String(field.value)}
                     onValueChange={field.onChange}
                     required
                   >

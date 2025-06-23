@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -9,16 +9,16 @@ import {
   type ColumnFiltersState,
   type SortingState,
   type VisibilityState,
-} from "@tanstack/react-table"
-import { ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
+} from "@tanstack/react-table";
+import { ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -26,28 +26,21 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { AdminCSVExportButton } from "@/components/AdminCSVExportButton"
-import type { IDataTable } from "@/interfaces/IDataTable"
-
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
+} from "@/components/ui/table";
+import type { IDataTable } from "@/interfaces/IDataTable";
+import { AdminCSVExportButton } from "@/components/AdminCSVExportButton";
 
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: IDataTable<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  )
+  );
   const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -66,59 +59,59 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filtrar pelo nome..."
-          value={
-            (table
-              .getColumn("name")
-              ?.getFilterValue() as string) ?? ""
-          }
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table
-              .getColumn("name")
-              ?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-        <div className="ml-auto flex gap-2">
+
+        <div className="ml-auto flex gap-3">
           <AdminCSVExportButton
-            data={table.getFilteredRowModel().rows.map(row => row.original)}
+            data={table.getFilteredRowModel().rows.map((row) => row.original)}
             columns={columns}
-            filename="residuos"
+            filename="clientes"
           />
           <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">
-              Colunas <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {(column.id === "id" && "Código") ||
-                      (column.id === "name" && "Nome") ||
-                      (column.id === "status" && "Status")}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Colunas <ChevronDown />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {(column.id === "id" && "Código") ||
+                        (column.id === "name" && "Nome") ||
+                        (column.id === "phone" && "Telefone") ||
+                        (column.id === "cpf_cnpj" && "CPF/CNPJ") ||
+                        (column.id === "address" && "Endereço") ||
+                        (column.id === "adress_number" && "Número") ||
+                        (column.id === "postal_code" && "Cep") ||
+                        (column.id === "status" && "Status")}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       <div className="rounded-md border">
@@ -172,7 +165,6 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-       
         <div className="space-x-2">
           <Button
             variant="outline"

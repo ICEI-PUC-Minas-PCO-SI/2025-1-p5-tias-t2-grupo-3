@@ -25,15 +25,15 @@ import api from "@/api";
 import { queryClient } from "@/lib/react-query";
 import type { IDumpsters } from "@/interfaces/IDumpsters";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
 
 const ModalCreateDumpsters = () => {
+  const { user } = useAuth();
   const { handleSubmit, register, control, reset } = useForm({
     defaultValues: {
       status: true,
       identifier_number: "",
       current_location: "",
-      created_by_user: 2,
-      updated_by_user: 2,
     },
   });
   const [open, setOpen] = useState(false);
@@ -44,8 +44,8 @@ const ModalCreateDumpsters = () => {
         status: data.status == "1" ? true : false,
         identifier_number: data.identifier_number,
         current_location: data.current_location,
-        created_by_user: data.created_by_user,
-        updated_by_user: data.updated_by_user,
+        created_by_user: user?.id,
+        updated_by_user: user?.id,
       });
 
       queryClient.setQueryData(["dumpsters"], (old: any[] = []) => {
