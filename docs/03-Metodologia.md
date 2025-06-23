@@ -124,7 +124,12 @@ Coloque informações sobre detalhes da implementação do Scrum seguido pelo gr
 
 ## Relação de ambientes de trabalho
 
-Os artefatos do projeto são desenvolvidos a partir de diversas plataformas. Todos os ambientes e frameworks utilizados no desenvolvimento da aplicação estão listados na seção abaixo.
+O grupo adotou a metodologia ágil Scrum para organizar o trabalho, utilizando o recurso GitHub Projects no formato Kanban. As tarefas foram divididas em sprints semanais e registradas como issues, com etiquetas (bug, feature, enhancement, etc.) e responsáveis definidos.
+
+O quadro foi estruturado com as colunas To Do, In Progress, In Review e Done, permitindo acompanhar o andamento do projeto. A comunicação do grupo ocorreu por WhatsApp e Discord, com alinhamentos frequentes.
+
+Cada tarefa foi desenvolvida em uma branch específica e integrada via pull request, com revisão entre os membros antes do merge. Essa abordagem garantiu organização, rastreabilidade e colaboração eficaz durante o desenvolvimento.
+
 
 ### Ferramentas
 
