@@ -23,13 +23,39 @@ Maria Inês Lage de Paula
 
 ## Instruções de utilização
 
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
 
-Não deixe de informar o link onde a aplicação estará disponível para acesso (por exemplo: https://adota-pet.herokuapp.com/src/index.html).
+1. Instale o pnpm
+   ```bash
+   npm install -g pnpm@latest-10
+   ```
 
-Se houver usuário de teste, o login e a senha também deverão ser informados aqui (por exemplo: usuário - admin / senha - admin).
+2. Instale as dependencias:
+   ```bash
+   pnpm install
+   ``` 
 
-O link e o usuário/senha descritos acima são apenas exemplos de como tais informações deverão ser apresentadas.
+3. Gere o schema do Prisma:
+   ```bash
+   pnpm run prisma:generate
+   ```
+
+4. Inicie o servirdor da API e do frontend:
+   ```bash
+   cd src/api
+   pnpm run dev
+
+   cd src/web
+   pnpm run dev
+   ```
+
+Não esqueça de colocar as credenciais no arquivo .env
+
+## Live project
+
+Disponível em: https://ecodump-p80hfydri-bravos-sports.vercel.app
+
+Usuário para teste: admin
+Senha para teste: admin
 
 # Documentação
 
