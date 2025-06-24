@@ -55,6 +55,7 @@ Não esqueça de colocar as credenciais no arquivo .env
 Disponível em: https://ecodump-p80hfydri-bravos-sports.vercel.app
 
 Usuário para teste: admin
+
 Senha para teste: admin
 
 # Documentação
