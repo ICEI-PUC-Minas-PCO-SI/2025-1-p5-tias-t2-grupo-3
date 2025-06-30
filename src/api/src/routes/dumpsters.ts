@@ -5,7 +5,11 @@ import { dumpsters } from "../generated/prisma";
 export const dumpsterRoutes = async (app: FastifyInstance) => {
   app.get("/", async (_request, reply) => {
     try {
-      const dumpsters = await db.dumpsters.findMany();
+      const dumpsters = await db.dumpsters.findMany({
+        include: {
+          location: true,
+        },
+      });
       return reply.send(dumpsters);
     } catch (error) {
       reply.status(500).send(error);

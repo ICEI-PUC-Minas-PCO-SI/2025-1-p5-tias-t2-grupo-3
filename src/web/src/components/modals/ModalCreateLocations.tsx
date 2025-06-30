@@ -23,37 +23,45 @@ import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
 import { queryClient } from "@/lib/react-query";
 import { toast } from "sonner";
-import type { IResidues } from "@/interfaces/IResidues";
-import { useAuth } from "@/hooks/useAuth";
+import MaskedInput from "../inputs/InputMask";
 import api from "@/api";
 
-const ModalCreateResidues = () => {
-  const { user } = useAuth();
+const ModalCreateLocations = () => {
   const { handleSubmit, register, control, reset } = useForm({
     defaultValues: {
       status: true,
       name: "",
+      address: "",
+      address_number: "",
+      zip_code: "",
+      city: "",
+      state: "",
     },
   });
   const [open, setOpen] = useState(false);
 
-  const handleSubmitForm = async (data: Partial<IResidues>) => {
+  const handleSubmitForm = async (data: any) => {
     try {
-      const response = await api.post("/residues", {
+      const response = await api.post("/locations", {
         status: data.status == "1" ? true : false,
         name: data.name,
-        created_by_user: user?.id,
-        updated_by_user: user?.id,
+        address: data.address,
+        address_number: data.address_number,
+        zip_code: data.zip_code,
+        city: data.city,
+        state: data.state,
+        created_at: new Date(),
+        updated_at: new Date(),
       });
 
-      queryClient.setQueryData(["residues"], (old: any[] = []) => {
+      queryClient.setQueryData(["locations"], (old: any[] = []) => {
         return [...old, response.data];
       });
       reset();
-      toast.success("Resíduo criado com sucesso");
+      toast.success("Localização criada com sucesso");
       setOpen(false);
     } catch (error) {
-      toast.error("Erro ao criar o resíduo");
+      toast.error("Erro ao criar a localização");
     }
   };
 
@@ -71,7 +79,7 @@ const ModalCreateResidues = () => {
       <DialogContent className="sm:max-w-[500px]">
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <DialogHeader>
-            <DialogTitle>Criar Resíduo</DialogTitle>
+            <DialogTitle>Criar Localização</DialogTitle>
             <DialogDescription>
               Clique em salvar quando você terminar.
             </DialogDescription>
@@ -81,9 +89,60 @@ const ModalCreateResidues = () => {
               <Label htmlFor="name">Nome</Label>
               <Input
                 id="name"
-                placeholder="Digite o nome do resíduo..."
+                placeholder="Digite o nome da localização..."
                 required
                 {...register("name")}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="address">Endereço</Label>
+              <Input
+                id="address"
+                placeholder="Digite o endereço da localização..."
+                required
+                {...register("address")}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="address_number">Número</Label>
+              <Input
+                id="address_number"
+                placeholder="Digite o número do endereço..."
+                required
+                {...register("address_number")}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="postal_code">CEP</Label>
+              <Controller
+                name="zip_code"
+                control={control}
+                render={({ field }) => (
+                  <MaskedInput
+                    mask="00.000-000"
+                    value={field.value || ""}
+                    onChange={(value) => field.onChange(value)}
+                    placeholder="Digite o CEP da localização..."
+                  />
+                )}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="city">Cidade</Label>
+              <Input
+                id="city"
+                placeholder="Digite a cidade da localização..."
+                required
+                {...register("city")}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="state">Estado</Label>
+              <Input
+                id="state"
+                placeholder="Digite o estado da localização..."
+                required
+                {...register("state")}
               />
             </div>
             <div className="grid gap-3">
@@ -125,4 +184,4 @@ const ModalCreateResidues = () => {
   );
 };
 
-export default ModalCreateResidues;
+export default ModalCreateLocations;

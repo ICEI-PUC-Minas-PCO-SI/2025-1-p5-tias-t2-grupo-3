@@ -4,7 +4,7 @@ export interface IOperation {
   driver_name: string;
   operation_type: string;
   date: Date;
-  location: string;
+  location_id: number;
   destination: string;
   comments: string;
   status_id: number;

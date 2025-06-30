@@ -1,10 +1,10 @@
+import api from "@/api"
 import Container from "@/components/Container"
 import { DataTable } from "./table/dataTable"
 import { columns } from "./table/columns"
 import { useQuery } from "@tanstack/react-query"
 import { Loading } from "@/components/Loading"
 import { toast } from "sonner"
-import api from "@/api"
 import { StatusFilter } from "@/components/StatusFilter"
 import { useState } from "react"
 
@@ -15,13 +15,11 @@ const getOperations = async (status?: string) => {
 }
 
 const Operations = () => {
-  const [statusFilter, setStatusFilter] = useState("2") // Default to active
-
+  const [statusFilter, setStatusFilter] = useState("1") // Default to active
   const {
     data = [],
     isLoading,
-    isError,
-    refetch
+    isError
   } = useQuery({
     queryKey: ["operations", statusFilter],
     queryFn: () => getOperations(statusFilter),

@@ -13,10 +13,10 @@ interface StatusFilterProps {
   totalCount?: number
 }
 
-const statusOptions = [
-  { value: "2", label: "Ativo", color: "text-green-600" },
-  { value: "1", label: "Pendente", color: "text-yellow-600" },
-  { value: "3", label: "Inativo", color: "text-gray-600" },
+export const statusOptions = [
+  { value: "1", label: "Ativo", color: "text-green-600" },
+  { value: "2", label: "Inativo", color: "text-gray-600" },
+  { value: "3", label: "Pendente", color: "text-yellow-600" },
   { value: "4", label: "Concluído", color: "text-blue-600" },
   { value: "5", label: "Cancelado", color: "text-red-600" },
   { value: "all", label: "Todos", color: "text-purple-600" },

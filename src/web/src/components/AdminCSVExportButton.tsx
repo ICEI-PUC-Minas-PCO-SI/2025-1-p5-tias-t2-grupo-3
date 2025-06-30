@@ -27,6 +27,7 @@ export function AdminCSVExportButton<TData>({
   if (!isAdmin()) {
     return null;
   }
+  console.log(data, 'data')
 
   return (
     <CSVExportButton

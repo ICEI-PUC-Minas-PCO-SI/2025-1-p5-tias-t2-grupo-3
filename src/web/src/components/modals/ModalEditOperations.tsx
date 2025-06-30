@@ -32,6 +32,7 @@ import { Calendar } from "../ui/calendar";
 import { ptBR } from "date-fns/locale";
 import { useRef, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const ModalEditOperations = ({
   open,
@@ -52,7 +53,7 @@ const ModalEditOperations = ({
       driver_name: operation.driver_name,
       operation_type: operation.operation_type,
       date: operation.date,
-      location: operation.location,
+      location_id: operation.location_id,
       destination: operation.destination,
       comments: operation.comments,
       status_id: operation.status_id,
@@ -69,11 +70,12 @@ const ModalEditOperations = ({
         rent_id: operation.rent_id,
         driver_name: operation.driver_name,
         operation_type: operation.operation_type,
-        location: data.location,
+        location_id: data.location_id,
         destination: data.destination,
         comments: data.comments,
         updated_by_user: user?.id,
       });
+      
       queryClient.setQueryData(["operations"], (old: any[] = []) => {
         return old.map((item) => {
           if (item.id === response.data.id) {
@@ -82,6 +84,7 @@ const ModalEditOperations = ({
           return item;
         });
       });
+      toast.success("Operação editada com sucesso.");
       reset();
       setOpen(false);
     } catch (error) {
@@ -142,12 +145,12 @@ const ModalEditOperations = ({
               </Popover>
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="location">Localização</Label>
+              <Label htmlFor="location_id">Localização</Label>
               <Input
-                id="location"
+                id="location_id"
                 placeholder="Digite a localização atual da caçamba..."
                 required
-                {...register("location")}
+                {...register("location_id")}
               />
             </div>
             <div className="grid gap-3">
@@ -160,10 +163,10 @@ const ModalEditOperations = ({
               />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="comments">Comentario</Label>
+              <Label htmlFor="comments">Comentário</Label>
               <Input
                 id="comments"
-                placeholder="Digite a nova localização"
+                placeholder="Digite o comentário da operação."
                 required
                 {...register("comments")}
               />

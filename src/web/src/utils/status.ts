@@ -1,7 +1,7 @@
 export const statuses = {
-  1: 'pending',
-  2: 'active',
-  3: 'inactive',
+  1: 'active',
+  2: 'inactive',
+  3: 'pending',
   4: 'completed',
   5: 'canceled',
   true: 'active',

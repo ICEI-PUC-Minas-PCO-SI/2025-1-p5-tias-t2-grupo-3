@@ -16,7 +16,11 @@ export const operationRoutes = async (app: FastifyInstance) => {
         { status_id: 2 }
       
       const operations = await db.operations.findMany({
-        where: whereClause
+        where: whereClause,
+        include: {
+          location: true,
+          rent: true
+        },
       })
       return reply.send(operations)
     } catch (error) {

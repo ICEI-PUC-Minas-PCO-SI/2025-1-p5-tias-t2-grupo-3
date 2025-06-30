@@ -1,4 +1,4 @@
-import { BadgeDollarSign, MonitorCog, Recycle, Truck, UsersRound } from "lucide-react";
+import { BadgeDollarSign, MonitorCog, Recycle, Truck, MapPinHouse, UsersRound } from "lucide-react";
 
 export const items = [
   {
@@ -26,4 +26,9 @@ export const items = [
     url: "/clients",
     icon: UsersRound,
   },
+  {
+    title: "Locais de entrega",
+    url: "/locations",
+    icon: MapPinHouse,
+  }
 ];

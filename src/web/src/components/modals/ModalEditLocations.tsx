@@ -1,3 +1,4 @@
+import api from "@/api";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,7 +8,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -20,69 +20,69 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm, Controller } from "react-hook-form";
-import { useState } from "react";
-import api from "@/api";
 import { queryClient } from "@/lib/react-query";
-import { toast } from "sonner";
 import MaskedInput from "../inputs/InputMask";
-import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
+import type { ILocations } from "@/interfaces/ILocations";
 
-const ModalCreateClients = () => {
-  const { user } = useAuth();
+const ModalEditLocations = ({
+  open,
+  setOpen,
+  data: location
+}: {
+  open: boolean;
+  data: ILocations;
+  setOpen: (open: boolean) => void;
+}) => {
   const { handleSubmit, register, control, reset } = useForm({
     defaultValues: {
-      status: true,
-      name: "",
-      phone: "",
-      cpf_cnpj: "",
-      address: "",
-      adress_number: "",
-      postal_code: ""
+      status: location.status,
+      name: location.name,
+      address: location.address,
+      address_number: location.address_number,
+      zip_code: location.zip_code,
+      city: location.city,
+      state: location.state,
+      updated_at: new Date(),
     },
   });
-  const [open, setOpen] = useState(false);
-  console.log(user, 'user')
 
-  const handleSubmitForm = async (data: any) => {
+  const handleSubmitForm = async (data: Partial<ILocations>) => {
     try {
-      const response = await api.post("/clients", {
+      const response = await api.put(`/locations/${location.id}`, {
         status: data.status == "1" ? true : false,
         name: data.name,
-        phone: data.phone,
-        cpf_cnpj: data.cpf_cnpj,
         address: data.address,
-        adress_number: data.adress_number,
-        postal_code: data.postal_code,
-        created_by_user: user?.id,
-        updated_by_user: user?.id,
+        address_number: data.address_number,
+        zip_code: data.zip_code,
+        city: data.city,
+        state: data.state,
+        updated_at: location.updated_at,
       });
-
-      queryClient.setQueryData(["clients"], (old: any[] = []) => {
-        return [...old, response.data];
+      
+      queryClient.setQueryData(["locations"], (old: any[] = []) => {
+        return old.map((item) => {
+          if (item.id === response.data.id) {
+            return response.data;
+          }
+          return item;
+        });
       });
+      toast.success("Localização editada com sucesso.");
       reset();
-      toast.success("Cliente criada com sucesso");
       setOpen(false);
     } catch (error) {
-      toast.error("Erro ao criar a cliente");
+      console.error(error);
+      toast.error("Erro ao editar a localização");
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button
-          className="bg-green-600 hover:bg-green-800 text-white hover:text-white"
-          variant="outline"
-          onClick={() => setOpen(true)}
-        >
-          Criar
-        </Button>
-      </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <DialogHeader>
-            <DialogTitle>Criar Cliente</DialogTitle>
+            <DialogTitle>Editar Localização</DialogTitle>
             <DialogDescription>
               Clique em salvar quando você terminar.
             </DialogDescription>
@@ -92,74 +92,60 @@ const ModalCreateClients = () => {
               <Label htmlFor="name">Nome</Label>
               <Input
                 id="name"
-                placeholder="Digite o nome do cliente..."
+                placeholder="Digite o nome da localização..."
                 required
                 {...register("name")}
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="phone">Telefone</Label>
-              <Controller
-                name="phone"
-                control={control}
-                render={({ field }) => (
-                    <MaskedInput
-                      mask={"(00) 00000-0000"}
-                      value={field.value || ""}
-                      onChange={(value) => field.onChange(value)}
-                      placeholder="Digite o telefone do cliente..."
-                    />
-                )}
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="cpf_cnpj">CPF/CNPJ</Label>
-              <Controller
-                name="cpf_cnpj"
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <MaskedInput
-                      mask={field.value?.length > 14 ? "00.000.000/0000-000" : "000.000.000-00"}
-                      value={field.value || ""}
-                      onChange={(value) => field.onChange(value)}
-                      placeholder="Digite o CPF/CNPJ do cliente..."
-                    />
-                  )
-                }}
               />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="address">Endereço</Label>
               <Input
                 id="address"
-                placeholder="Digite o endereço do cliente..."
+                placeholder="Digite o endereço da localização..."
                 required
                 {...register("address")}
               />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="adress_number">Número</Label>
+              <Label htmlFor="address_number">Número</Label>
               <Input
-                id="adress_number"
+                id="address_number"
                 placeholder="Digite o número do endereço..."
                 required
-                {...register("adress_number")}
+                {...register("address_number")}
               />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="postal_code">CEP</Label>
+              <Label htmlFor="zip_code">CEP</Label>
               <Controller
-                name="postal_code"
+                name="zip_code"
                 control={control}
                 render={({ field }) => (
                   <MaskedInput
                     mask="00.000-000"
                     value={field.value || ""}
                     onChange={(value) => field.onChange(value)}
-                    placeholder="Digite o CEP do cliente..."
+                    placeholder="Digite o CEP da localização..."
                   />
                 )}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="city">Cidade</Label>
+              <Input
+                id="city"
+                placeholder="Digite a cidade da localização..."
+                required
+                {...register("city")}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="state">Estado</Label>
+              <Input
+                id="state"
+                placeholder="Digite o estado da localização..."
+                required
+                {...register("state")}
               />
             </div>
             <div className="grid gap-3">
@@ -201,4 +187,4 @@ const ModalCreateClients = () => {
   );
 };
 
-export default ModalCreateClients;
+export default ModalEditLocations;

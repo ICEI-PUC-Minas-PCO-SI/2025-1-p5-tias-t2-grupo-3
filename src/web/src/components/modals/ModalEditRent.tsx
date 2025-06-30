@@ -35,6 +35,7 @@ import { ptBR } from "date-fns/locale";
 import { useRef, useState } from "react";
 import moment from "moment";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const getStatuses = async () => {
   try {
@@ -88,6 +89,7 @@ const ModalEditRent = ({
           return item;
         });
       });
+      toast.success("Aluguel editado com sucesso.");
       reset();
       setOpen(false);
     } catch (error) {

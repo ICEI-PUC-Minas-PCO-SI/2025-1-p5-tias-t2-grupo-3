@@ -26,9 +26,12 @@ import { queryClient } from "@/lib/react-query";
 import type { IDumpsters } from "@/interfaces/IDumpsters";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocations } from "@/hooks/useLocations";
+import type { ILocations } from "@/interfaces/ILocations";
 
 const ModalCreateDumpsters = () => {
   const { user } = useAuth();
+  const { locations } = useLocations();
   const { handleSubmit, register, control, reset } = useForm({
     defaultValues: {
       status: true,
@@ -43,7 +46,7 @@ const ModalCreateDumpsters = () => {
       const response = await api.post("/dumpsters", {
         status: data.status == "1" ? true : false,
         identifier_number: data.identifier_number,
-        current_location: data.current_location,
+        current_location: Number(data.current_location),
         created_by_user: user?.id,
         updated_by_user: user?.id,
       });
@@ -90,11 +93,34 @@ const ModalCreateDumpsters = () => {
             </div>
             <div className="grid gap-3">
               <Label htmlFor="current_location">Localização</Label>
-              <Input
-                id="current_location"
-                placeholder="Digite a localização atual da caçamba..."
-                required
-                {...register("current_location")}
+              <Controller
+                name="current_location"
+                control={control}
+                render={({ field }) => {
+                  return (
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      required
+                    >
+                      <SelectTrigger className="w-full" id="current_location">
+                        <SelectValue placeholder="Selecione a Localização" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {locations?.map((location: ILocations) => (
+                            <SelectItem
+                              key={location.id}
+                              value={String(location.id)}
+                            >
+                              {location.name} - {location.address} - {location.zip_code}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  );
+                }}
               />
             </div>
             <div className="grid gap-3">

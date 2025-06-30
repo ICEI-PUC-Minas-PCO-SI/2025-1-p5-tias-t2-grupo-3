@@ -42,6 +42,7 @@ import moment from "moment";
 import type { IClients } from "@/interfaces/IClients";
 import type { IResidues } from "@/interfaces/IResidues";
 import type { IDumpsters } from "@/interfaces/IDumpsters";
+import { useLocations } from "@/hooks/useLocations";
 
 const getModalData = async () => {
   const response = await api.get("/rents/create");
@@ -61,6 +62,8 @@ const ModalCreateRents = () => {
     queryFn: getModalData,
   });
   const { statuses } = useStatuses();
+  const { locations } = useLocations();
+
   const [open, setOpen] = useState(false);
 
   const handleSubmitForm = async (data: Partial<IRent>) => {
@@ -87,11 +90,11 @@ const ModalCreateRents = () => {
       reset();
       setRentDate(undefined);
       setDeliveryDate(undefined);
-      toast.success("Caçamba criada com sucesso");
+      toast.success("Aluguel criada com sucesso");
       setOpen(false);
     } catch (error) {
       console.error(error, 'Erro ao criar o aluguel');
-      toast.error("Erro ao criar a caçamba");
+      toast.error("Erro ao criar o aluguel");
     }
   };
 
@@ -358,15 +361,38 @@ const ModalCreateRents = () => {
                   {...register("operation_type")}
                 />
               </div>
-              <div className="grid gap-3">
+               <div className="grid gap-3">
                 <Label htmlFor="location">Localização</Label>
-                <Input
-                  placeholder="Digite o endereço do local de retirada"
-                  {...register("location")}
+                <Controller
+                  name="location_id"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                      required
+                    >
+                      <SelectTrigger className="w-full" id="location_id">
+                        <SelectValue placeholder="Selecione a localização" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {locations?.map((location: any) => (
+                            <SelectItem
+                              key={String(location.id)}
+                              value={String(location.id)}
+                            >
+                              {location.name} - {location.address} - {location.zip_code}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
                 />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="location">Destino</Label>
+                <Label htmlFor="destination">Destino</Label>
                 <Input
                   placeholder="Digite o endereço de destino"
                   {...register("destination")}

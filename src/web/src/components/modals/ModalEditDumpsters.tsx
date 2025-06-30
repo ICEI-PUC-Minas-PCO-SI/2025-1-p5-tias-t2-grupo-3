@@ -23,6 +23,7 @@ import { useForm, Controller } from "react-hook-form";
 import { queryClient } from "@/lib/react-query";
 import type { IDumpsters } from "@/interfaces/IDumpsters";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const ModalEditDumpsters = ({
   open,
@@ -52,6 +53,7 @@ const ModalEditDumpsters = ({
         created_by_user: data.created_by_user,
         updated_by_user: user?.id,
       });
+      
       queryClient.setQueryData(["dumpsters"], (old: any[] = []) => {
         return old.map((item) => {
           if (item.id === response.data.id) {
@@ -60,6 +62,7 @@ const ModalEditDumpsters = ({
           return item;
         });
       });
+      toast.success("Caçamba editada com sucesso.");
       setOpen(false);
     } catch (error) {
       console.error(error);

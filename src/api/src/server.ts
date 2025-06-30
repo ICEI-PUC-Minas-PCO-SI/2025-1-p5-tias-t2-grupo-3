@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import {
   clientRoutes,
   dumpsterRoutes,
+  locationRoutes,
   operationRoutes,
   rentRoutes,
   residueRoutes,
@@ -20,6 +21,7 @@ app.register(operationRoutes, { prefix: "/api/operations" });
 app.register(rentRoutes, { prefix: "/api/rents" });
 app.register(statusRoutes, { prefix: "/api/statuses" });
 app.register(clientRoutes, { prefix: "/api/clients" });
+app.register(locationRoutes, { prefix: "/api/locations" });
 
 app.register(require("@fastify/cors"), {
   origin: "*",
@@ -28,7 +30,7 @@ app.register(require("@fastify/cors"), {
   credentials: true,
 });
 
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 3002;
 app
   .listen({ port: PORT, host: "0.0.0.0" })
   .then(() => console.log(`Servidor rodando em http://0.0.0.0:${PORT}`))

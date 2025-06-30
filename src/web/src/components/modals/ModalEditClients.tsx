@@ -24,6 +24,7 @@ import { queryClient } from "@/lib/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import MaskedInput from "../inputs/InputMask";
 import type { IClients } from "@/interfaces/IClients";
+import { toast } from "sonner";
 
 const ModalEditClients = ({
   open,
@@ -60,6 +61,7 @@ const ModalEditClients = ({
         created_by_user: client.created_by_user,
         updated_by_user: user?.id,
       });
+      
       queryClient.setQueryData(["clients"], (old: any[] = []) => {
         return old.map((item) => {
           if (item.id === response.data.id) {
@@ -68,6 +70,7 @@ const ModalEditClients = ({
           return item;
         });
       });
+      toast.success("Cliente editado com sucesso.");
       reset();
       setOpen(false);
     } catch (error) {

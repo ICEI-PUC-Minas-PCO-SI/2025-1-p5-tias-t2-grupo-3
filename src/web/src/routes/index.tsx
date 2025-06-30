@@ -8,6 +8,7 @@ import Rent from "@/pages/rent";
 import SignIn from "@/pages/sign/sign-in";
 import SignUp from "@/pages/sign/sign-up";
 import Clients from "@/pages/clients";
+import Locations from "@/pages/locations";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,16 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Layout>
           <Residues />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/locations",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <Locations />
         </Layout>
       </ProtectedRoute>
     ),

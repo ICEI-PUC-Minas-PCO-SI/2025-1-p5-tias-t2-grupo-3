@@ -29,13 +29,8 @@ import {
 } from "@/components/ui/table"
 import { AdminCSVExportButton } from "@/components/AdminCSVExportButton"
 import type { IDataTable } from "@/interfaces/IDataTable"
-
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
+import { statusOptions } from "@/components/StatusFilter"
+import { csvColumns } from "./columns"
 
 export function DataTable<TData, TValue>({
   columns,
@@ -66,8 +61,33 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
+  const formatCsvData = (data: any) => {
+    return data.map((item: any) => ({
+      // Campos da tabela operações
+      codigoOperacao: item.id,
+      codigoAluguel: item.rent_id,
+      nomeMotorista: item.driver_name,
+      tipoOperacao: item.operation_type,
+      data: item.date,
+      codigoLocalizacao: item.location_id,
+      destino: item.destination,
+      comentarios: item.comments,
+      statusId: item.status_id,
+      criadoPorUsuario: item.created_by_user,
+      atualizadoPorUsuario: item.updated_by_user,
+      // Campo location formatado
+      localizacao: item.location ? 
+        `${item.location.name}, ${item.location.address}, ${item.location.city}, ${item.location.state}` : 
+        "",
+      // Campos do rent (aluguel)
+      dataAluguel: item.rent?.rent_date,
+      dataEntrega: item.rent?.delivery_date,
+      statusIdAluguel: statusOptions.find((status) => status.value == item?.status_id)?.label,
+    }));
+  };
+  
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
@@ -81,8 +101,8 @@ export function DataTable<TData, TValue>({
         />
         <div className="ml-auto flex gap-2">
           <AdminCSVExportButton
-            data={table.getFilteredRowModel().rows.map(row => row.original)}
-            columns={columns}
+            data={formatCsvData(table.getFilteredRowModel().rows.map(row => row.original))}
+            columns={csvColumns}
             filename="operacoes"
           />
           <DropdownMenu>
@@ -174,7 +194,6 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-       
         <div className="space-x-2">
           <Button
             variant="outline"

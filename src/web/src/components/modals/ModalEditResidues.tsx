@@ -23,6 +23,7 @@ import { useForm, Controller } from "react-hook-form";
 import { queryClient } from "@/lib/react-query";
 import type { IResidues } from "@/interfaces/IResidues";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const ModalEditResidues = ({
   open,
@@ -50,6 +51,7 @@ const ModalEditResidues = ({
         created_by_user: data.created_by_user,
         updated_by_user: user?.id,
       });
+      
       queryClient.setQueryData(["residues"], (old: any[] = []) => {
         return old.map((item) => {
           if (item.id === response.data.id) {
@@ -58,6 +60,7 @@ const ModalEditResidues = ({
           return item;
         });
       });
+      toast.success("Resíduo editado com sucesso.");
       setOpen(false);
     } catch (error) {
       console.error(error);

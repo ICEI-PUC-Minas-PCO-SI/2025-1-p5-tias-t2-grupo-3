@@ -51,12 +51,13 @@ model clients {
 model dumpsters {
   id               Int     @id @default(autoincrement())
   identifier_number String
-  current_location  String
+  current_location  Int
   status            Boolean
   created_by_user   Int
   updated_by_user   Int
   createdBy         users   @relation("dumpsters_created_by_user", fields: [created_by_user], references: [id])
   updatedBy         users   @relation("dumpsters_updated_by_user", fields: [updated_by_user], references: [id])
+  location          locations @relation(fields: [current_location], references: [id])
   rents             rent[]
 }
 
@@ -96,7 +97,7 @@ model operations {
   driver_name     String
   operation_type  String
   date            DateTime
-  location        String
+  location_id     Int
   destination     String
   comments        String
   status_id       Int
@@ -106,6 +107,7 @@ model operations {
   status          status   @relation(fields: [status_id], references: [id])
   createdBy       users    @relation("operations_created_by_user", fields: [created_by_user], references: [id])
   updatedBy       users    @relation("operations_updated_by_user", fields: [updated_by_user], references: [id])
+  location        locations @relation(fields: [location_id], references: [id])
 }
 
 model status {
@@ -114,5 +116,20 @@ model status {
   code  String
   color String
   rents rent[]
+  operations operations[]
+}
+
+model locations {
+  id    Int    @id @default(autoincrement())
+  name  String
+  address String
+  address_number String
+  city String
+  state String
+  zip_code String
+  status Boolean
+  created_at DateTime
+  updated_at DateTime
+  dumpsters dumpsters[]
   operations operations[]
 }

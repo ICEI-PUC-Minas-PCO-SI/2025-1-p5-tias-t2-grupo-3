@@ -26,9 +26,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { AdminCSVExportButton } from "@/components/AdminCSVExportButton"
-import type { IDataTable } from "@/interfaces/IDataTable"
+} from "@/components/ui/table";
+import type { IDataTable } from "@/interfaces/IDataTable";
+import { AdminCSVExportButton } from "@/components/AdminCSVExportButton";
 
 export function DataTable<TData, TValue>({
   columns,
@@ -65,22 +65,23 @@ export function DataTable<TData, TValue>({
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filtrar pelo cliente..."
-          value={(table.getColumn("client")?.getFilterValue() as string) ?? ""}
+          placeholder="Filtrar pelo nome..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("client")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-        <div className="ml-auto flex gap-2">
+
+        <div className="ml-auto flex gap-3">
           <AdminCSVExportButton
-            data={table.getFilteredRowModel().rows.map(row => row.original)}
+            data={table.getFilteredRowModel().rows.map((row) => row.original)}
             columns={columns}
-            filename="alugueis"
+            filename="clientes"
           />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">
+              <Button variant="outline" className="ml-auto">
                 Colunas <ChevronDown />
               </Button>
             </DropdownMenuTrigger>
@@ -99,14 +100,16 @@ export function DataTable<TData, TValue>({
                       }
                     >
                       {(column.id === "id" && "Código") ||
-                        (column.id === "client" && "Código do Cliente") ||
-                        (column.id === "dumpster" && "Código da Caçamba") ||
-                         (column.id === "residue" && "Código do Residuo") ||
-                          (column.id === "rent_date" && "Data do Aluguel") ||
-                           (column.id === "delivery_date" && "Data da Entrega") ||
-                        (column.id === "status_id" && "Status")}
+                        (column.id === "name" && "Nome") ||
+                        (column.id === "phone" && "Telefone") ||
+                        (column.id === "address" && "Endereço") ||
+                        (column.id === "address_number" && "Número") ||
+                        (column.id === "city" && "Cidade") ||
+                        (column.id === "state" && "Estado") ||
+                        (column.id === "zip_code" && "Cep") ||
+                        (column.id === "status" && "Status")}
                     </DropdownMenuCheckboxItem>
-                  )
+                  );
                 })}
             </DropdownMenuContent>
           </DropdownMenu>

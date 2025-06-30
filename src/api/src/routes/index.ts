@@ -5,6 +5,7 @@ import { residueRoutes } from "./residues";
 import { statusRoutes } from "./statuses";
 import { userRoutes } from "./users";
 import { clientRoutes } from "./clients";
+import { locationRoutes } from "./locations";
 
 export {
   dumpsterRoutes,
@@ -13,5 +14,6 @@ export {
   operationRoutes,
   rentRoutes,
   statusRoutes,
-  clientRoutes
+  clientRoutes,
+  locationRoutes
 };

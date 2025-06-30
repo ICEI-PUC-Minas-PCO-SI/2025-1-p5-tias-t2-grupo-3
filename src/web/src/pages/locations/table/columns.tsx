@@ -11,19 +11,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { StatusLabel, type StatusType } from "@/components/StatusLabel";
 import { useState } from "react";
-import ModalEditDumpsters from "@/components/modals/ModalEditDumpsters";
 import { statuses } from "@/utils/status";
+import { formatPostalCode } from "@/utils/formatPostalCode";
+import type { ILocations } from "@/interfaces/ILocations";
+import ModalEditLocations from "@/components/modals/ModalEditLocations";
 
-export type Dumpsters = {
-  id: number;
-  identifier_number: string;
-  current_location: string;
-  status: boolean;
-  created_by_user: number;
-  updated_by_user: number;
-};
-
-export const columns: ColumnDef<Dumpsters>[] = [
+export const columns: ColumnDef<ILocations>[] = [
   {
     accessorKey: "id",
     
@@ -40,35 +33,44 @@ export const columns: ColumnDef<Dumpsters>[] = [
     },
   },
   {
-    accessorKey: "identifier_number",
+    accessorKey: "name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Identificador
+          Nome
           <ArrowUpDown />
         </Button>
       )
     },
-    cell: ({ row }) => <div>{row.getValue("identifier_number")}</div>,
+    cell: ({ row }) => <div>{row.getValue("name")}</div>,
   },
   {
-    accessorKey: "location",
-    header: () => <div className="text-center">Localização</div>,
-    cell: ({ row }) => {
-      const location = row.getValue("location") as {
-        name: string;
-        address: string;
-        city: string;
-        state: string;
-      };
-
-      if (!location) return "-";
-
-      return `${location?.name} - ${location?.address} - ${location?.city} - ${location?.state}`
-    },
+    accessorKey: "address",
+    header: () => <div className="text-center">Endereço</div>,
+    cell: ({ row }) => row.getValue("address")
+  },
+  {
+    accessorKey: "zip_code",
+    header: () => <div className="text-center">CEP</div>,
+    cell: ({ row }) => formatPostalCode(row.getValue("zip_code"))
+  },
+  {
+    accessorKey: "address_number",
+    header: () => <div className="text-center">Número</div>,
+    cell: ({ row }) => row.getValue("address_number")
+  },
+  {
+    accessorKey: "city",
+    header: () => <div className="text-center">Cidade</div>,
+    cell: ({ row }) => row.getValue("city")
+  },
+  {
+    accessorKey: "state",
+    header: () => <div className="text-center">Estado</div>,
+    cell: ({ row }) => row.getValue("state")
   },
   {
     accessorKey: "status",
@@ -109,7 +111,7 @@ export const columns: ColumnDef<Dumpsters>[] = [
               <DropdownMenuItem onClick={() => setOpen(true)}>Editar</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <ModalEditDumpsters
+          <ModalEditLocations
             open={open}
             setOpen={setOpen}
             data={row.original}

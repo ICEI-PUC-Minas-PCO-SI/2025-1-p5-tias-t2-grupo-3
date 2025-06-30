@@ -23,7 +23,7 @@ export const createRentService = async (data: any) => {
           driver_name: data.driver_name,
           operation_type: data.operation_type,
           date: moment(data.date).toDate(),
-          location: data.location,
+          location_id: Number(data.location_id),
           destination: data.destination,
           comments: data.comments,
           status_id: Number(data.status_id),
