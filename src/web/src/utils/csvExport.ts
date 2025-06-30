@@ -13,7 +13,7 @@ const getColumnHeader = (column: ColumnDef<any, any>): string => {
   }
   
   // Handle function headers by using accessorKey or id as fallback
-  if (column.accessorKey) {
+  if ('accessorKey' in column && column.accessorKey) {
     return String(column.accessorKey);
   }
   
@@ -29,16 +29,15 @@ const getColumnHeader = (column: ColumnDef<any, any>): string => {
  */
 export const convertToCSV = <TData>(
   data: TData[],
-  columns: ColumnDef<TData, any>[],
-  filename?: string
+  columns: ColumnDef<TData, any>[]
 ): string => {
   if (!data || data.length === 0) {
     return '';
   }
 
-  // Get visible columns that have accessorKey (exclude action columns)
+  // Get visible columns that have accessorKey or accessorFn (exclude action columns)
   const visibleColumns = columns.filter(col => 
-    col.accessorKey && 
+    ('accessorKey' in col || 'accessorFn' in col) &&
     col.id !== 'actions' &&
     !col.id?.includes('action')
   );
@@ -52,8 +51,15 @@ export const convertToCSV = <TData>(
   // Create CSV rows
   const rows = data.map(row => {
     return visibleColumns.map(col => {
-      const key = col.accessorKey as keyof TData;
-      let value = row[key];
+      let value: any;
+
+      if ('accessorFn' in col && typeof col.accessorFn === 'function') {
+        value = col.accessorFn(row, 0); // 0 as rowIndex, adjust if needed
+      } else if ('accessorKey' in col) {
+        value = (row as any)[(col as any).accessorKey];
+      } else {
+        value = undefined;
+      }
       
       // Handle different data types
       if (value === null || value === undefined) {
@@ -117,7 +123,7 @@ export const exportToCSV = <TData>(
   filename: string = 'export.csv'
 ): void => {
   try {
-    const csvContent = convertToCSV(data, columns, filename);
+    const csvContent = convertToCSV(data, columns);
     
     if (!csvContent) {
       throw new Error('Nenhum dado para exportar');
