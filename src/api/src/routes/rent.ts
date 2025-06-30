@@ -4,9 +4,19 @@ import { createRentService } from "../services";
 import moment from "moment";
 
 export const rentRoutes = async (app: FastifyInstance) => {
-  app.get("/", async (_request, reply) => {
+  app.get("/", async (request, reply) => {
     try {
+      const { status } = request.query as { status?: string }
+      
+      // Default to active (status_id: 2) if no status specified
+      // If status is 'all', don't filter by status
+      // Otherwise, filter by the specified status_id
+      const whereClause = status ? 
+        (status === 'all' ? {} : { status_id: parseInt(status) }) : 
+        { status_id: 2 }
+
       const rent = await db.rent.findMany({
+        where: whereClause,
         include: {
           client: true,
           dumpster: true,
