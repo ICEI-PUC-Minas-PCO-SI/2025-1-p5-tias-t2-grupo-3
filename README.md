@@ -39,6 +39,12 @@ Maria Inês Lage de Paula
    pnpm run prisma:generate
    ```
 
+3.5 Se o banco der algum problema, aplique o comando de migrations
+
+```bash
+   npx prisma migrate dev
+```
+
 4. Inicie o servirdor da API e do frontend:
    ```bash
    cd src/api
