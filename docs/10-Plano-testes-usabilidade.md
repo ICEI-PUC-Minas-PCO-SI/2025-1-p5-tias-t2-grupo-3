@@ -1,46 +1,91 @@
 # Plano de testes de usabilidade
 
-<span style="color:red">Pré-requisitos: <a href="05-Projeto-interface.md"> Projeto de interface</a></span>, <a href="08-Plano-testes-software.md"> Plano de testes de software</a>
+# Plano de Testes de Usabilidade – EcoDump
 
-O teste de usabilidade permite avaliar a qualidade da interface com o usuário da aplicação interativa. Um plano de teste de usabilidade deverá conter: o detalhamento dos objetivos (ou cenários) em função dos requisitos levantados/implementados, os critérios que serão utilizados para a seleção dos participantes, os procedimentos a serem adotados pelos condutores de teste (por exemplo: os testes serão presenciais ou remotos? O método será observação direta, medição ou avaliação?), os dados a serem coletados (quantidade de cliques, número de erros, tempo, etc.), a ordem de execução das tarefas e das etapas da sessão de teste, os recursos demandados, as métricas coletadas, entre outros.
+## 🎯 Objetivo
 
-Para cada voluntário do teste, é fundamental coletar e apresentar todos os dados/métricas previamente definidos. No entanto, atendendo à LGPD (Lei Geral de Proteção de Dados), nenhum dado sensível que permita identificar o voluntário deverá ser apresentado.
+Avaliar a **eficiência, eficácia e satisfação** dos usuários ao interagir com o sistema **EcoDump**, focando nas principais funcionalidades relacionadas à gestão e rastreamento de caçambas e resíduos. O teste visa verificar se a interface é intuitiva, se os fluxos de navegação são compreensíveis e se os usuários conseguem realizar as tarefas propostas com autonomia e confiança.
 
-> Exemplo:
+---
 
-O objetivo do plano de testes de usabilidade é obter informações quanto à expectativa dos usuários em relação à funcionalidade da aplicação de forma geral.
+## 🧪 Cenários de Teste
 
-Para tanto, foram elaborados quatro cenários, cada um baseado na definição apresentada sobre as histórias dos usuários, definido na etapa das especificações do projeto.
+| Nº do cenário | Descrição do cenário                                                                                   |
+|---------------|--------------------------------------------------------------------------------------------------------|
+| 1             | Você é um funcionário da empresa e deseja registrar o recebimento de uma nova caçamba no pátio.       |
+| 2             | Você é um administrador e precisa consultar o status atual de uma caçamba específica no sistema.       |
+| 3             | Você é um funcionário que deseja lançar o tipo e a quantidade de resíduos descartados em uma caçamba. |
+| 4             | Você é um gestor e precisa gerar um relatório com o histórico de uso das caçambas nos últimos 30 dias.|
 
-Foram convidadas quatro pessoas que os perfis se encaixassem nas definições das histórias apresentadas na documentação, visando averiguar os seguintes indicadores:
+---
 
-Taxa de sucesso: responde se o usuário conseguiu ou não executar a tarefa proposta;
+## 👤 Critérios de Seleção dos Participantes
 
-Satisfação subjetiva: responde como o usuário avalia o sistema com relação à execução da tarefa proposta, conforme a seguinte escala:
+Foram convidados **4 participantes** com perfis representativos das personas do sistema:
 
-1. Péssimo; 
-2. Ruim; 
-3. Regular; 
-4. Bom; 
-5. Ótimo.
+- 2 funcionários operacionais com pouca familiaridade com tecnologia  
+- 1 administrador interno  
+- 1 gestor com experiência em relatórios e indicadores  
 
-Tempo para conclusão da tarefa: em segundos, e em comparação com o tempo utilizado quando um especialista (um desenvolvedor) realiza a mesma tarefa.
+> Todos os participantes possuem experiência prática no uso do processo real (manual) de gerenciamento de caçambas.
 
-Objetivando respeitar as diretrizes da Lei Geral de Proteção de Dados, as informações pessoais dos usuários que participaram do teste não foram coletadas, tendo em vista a ausência de Termo de Consentimento Livre e Esclarecido.
+---
 
-> Apresente os cenários de testes utilizados na realização dos testes de usabilidade da sua aplicação. Escolha cenários de testes que demonstrem as principais histórias de usuário sendo realizadas. Neste tópico, você deve detalhar quais funcionalidades foram avaliadas, o grupo de usuários que foi escolhido para participar do teste e as ferramentas utilizadas.
+## 📋 Procedimentos do Teste
 
-## Cenários de teste de usabilidade
+- **Tipo de teste:** Presencial  
+- **Método de avaliação:** Observação direta e aplicação de questionário pós-tarefa  
+- **Local:** Instalações da empresa Alternativa Transportes LTDA  
+- **Condutores do teste:** Equipe de desenvolvimento e extensionistas orientadores  
 
-| Nº do cenário | Descrição do cenário |
-|---------------|----------------------|
-| 1             | Você é uma pessoa que deseja comprar um iPhone. Encontre no site um iPhone e veja detalhes de localização e contato da loja que o está anunciando. |
-| 2             | Você é uma pessoa que deseja comprar um smartphone até R$ 2.000,00. Encontre no site smartphones nessa faixa de preço. |
+---
 
+## 📊 Dados Coletados
 
-> **Links úteis**:
-> - [Teste de usabilidade: o que é e como fazer passo a passo](https://neilpatel.com/br/blog/teste-de-usabilidade/)
-> - [Teste de usabilidade: tudo o que você precisa saber!](https://medium.com/aela/teste-de-usabilidade-o-que-voc%C3%AA-precisa-saber-39a36343d9a6/)
-> - [Planejando testes de usabilidade: o que (e o que não) fazer](https://imasters.com.br/design-ux/planejando-testes-de-usabilidade-o-que-e-o-que-nao-fazer/)
-> - [Ferramentas de testes de usabilidade](https://www.usability.gov/how-to-and-tools/resources/templates.html)
-> - [UX Tools](https://uxdesign.cc/ux-user-research-and-user-testing-tools-2d339d379dc7)
+Para cada tarefa, foram coletadas as seguintes métricas:
+
+- **Taxa de sucesso:** O participante conseguiu ou não realizar a tarefa sem ajuda?  
+- **Tempo de execução:** Quantos segundos levou para completar a tarefa?  
+- **Número de cliques:** Quantas interações foram feitas até a conclusão?  
+- **Número de erros:** Quantos desvios do fluxo correto aconteceram?  
+- **Satisfação subjetiva:** Escala: Péssimo / Ruim / Regular / Bom / Ótimo  
+
+---
+
+## 🔄 Etapas da Sessão de Teste
+
+1. Apresentação do sistema e dos objetivos do teste (sem demonstrações práticas)  
+2. Instruções gerais sobre o que será avaliado  
+3. Realização das 4 tarefas por cada participante (uma de cada vez)  
+4. Coleta dos dados conforme os critérios definidos  
+5. Aplicação de questionário de satisfação  
+6. Encerramento e agradecimento  
+
+---
+
+## 🖥️ Recursos Demandados
+
+- Computador com acesso ao sistema EcoDump  
+- Cronômetro (aplicativo)  
+- Planilha de coleta de dados  
+- Questionários (impressos ou digitais)  
+- Observador anotador  
+
+---
+
+## 📈 Métricas Utilizadas
+
+- Tempo médio por tarefa  
+- Taxa de sucesso (%) por cenário  
+- Média de cliques por tarefa  
+- Frequência de erros  
+- Média da satisfação subjetiva  
+
+---
+
+## 🔐 Privacidade e LGPD
+
+Em conformidade com a **Lei Geral de Proteção de Dados (LGPD)**, **nenhum dado pessoal ou sensível foi coletado**. Todas as informações foram registradas de forma anônima e utilizadas exclusivamente para fins de avaliação de usabilidade.
+
+---
+
