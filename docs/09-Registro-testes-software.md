@@ -12,11 +12,11 @@
 
 | Caso de Teste | Requisito Associado | Registro de Evidência |
 |---------------|---------------------|------------------------|
-| CT-001 – Cadastrar nova caçamba | RF-001 – Permitir o registro de uma nova caçamba com dados como localização, capacidade e status. | [Ver evidência](https://www.exemplo.com/drive/ct-001) |
-| CT-002 – Editar dados de uma caçamba | RF-002 – Permitir a edição dos dados de uma caçamba registrada. | [Ver evidência](https://www.exemplo.com/drive/ct-002) |
-| CT-003 – Buscar caçambas com filtros | RF-004 – Permitir a pesquisa de caçambas usando filtros como localização e status. | [Ver evidência](https://www.exemplo.com/drive/ct-003) |
-| CT-004 – Visualizar localização em mapa | RF-009 – Exibir a localização das caçambas em mapa interativo. | [Ver evidência](https://www.exemplo.com/drive/ct-004) |
-| CT-005 – Gerar relatório de uso | RF-008 – Gerar relatórios baseados no uso das caçambas. | [Ver evidência](https://www.exemplo.com/drive/ct-005) |
+| CT-001 – Cadastrar nova caçamba | RF-001 – Permitir o registro de uma nova caçamba com dados como localização, capacidade e status. | [Ver evidência]  |
+| CT-002 – Editar dados de uma caçamba | RF-002 – Permitir a edição dos dados de uma caçamba registrada. | [Ver evidência] |
+| CT-003 – Buscar caçambas com filtros | RF-004 – Permitir a pesquisa de caçambas usando filtros como localização e status. | [Ver evidência] |
+| CT-004 – Visualizar localização em mapa | RF-009 – Exibir a localização das caçambas em mapa interativo. | [Ver evidência] |
+| CT-005 – Gerar relatório de uso | RF-008 – Gerar relatórios baseados no uso das caçambas. |[Ver evidência] |
 
 > 🎥 Cada link acima corresponde a um screencast gravado durante os testes, evidenciando a execução e o resultado de cada caso.
 
