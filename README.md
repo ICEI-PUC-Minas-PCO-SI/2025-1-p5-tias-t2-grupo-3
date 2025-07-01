@@ -58,7 +58,7 @@ Não esqueça de colocar as credenciais no arquivo .env
 
 ## Live project
 
-Disponível em: https://ecodump-p80hfydri-bravos-sports.vercel.app
+Disponível em: https://eco-dump-psi.vercel.app
 
 Usuário para teste: admin
 
